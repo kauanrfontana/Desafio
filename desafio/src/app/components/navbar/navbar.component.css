@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+  }
+  
+.sidenav {
+    width: 13.5%;
+    display: flex;
+    padding: 10px;
+}
+  
+.nav-icon{
+    align-self: center;
+    justify-self: center;
+}
+
+.nav-items{
+    margin-top: 10px;
+    width: 9rem;
+}
+
+.nav-items:hover{
+    scale: 1.02;
+}
+
+.content{
+    padding: 1rem;
+}
+  
