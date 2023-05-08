@@ -1,3 +1,22 @@
 .icon-header{
     padding-right: 10px;
 }
+
+::ng-deep .mat-toolbar{
+    z-index: 998;
+    position: fixed
+  }
+  ::ng-deep .mat-tab-group{
+    margin-top:55px !important;
+  }
+
+  ::ng-deep .mat-tab-header{
+        z-index: 999;
+        width:100vw;
+        position: fixed  !important;
+        background-color: red !important;
+  }
+  ::ng-deep .mat-tab-body-wrapper{
+      position: relative !important;
+      margin-top:55px;
+  }

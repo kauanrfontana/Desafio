@@ -1,13 +1,20 @@
-.container {
+.mat-sidenav-container {
     display: flex;
   }
-  
+
 .sidenav {
-    width: 13.5%;
+    width: 200px;
     display: flex;
     padding: 10px;
 }
-  
+
+.nav-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .nav-icon{
     align-self: center;
     justify-self: center;
@@ -15,7 +22,7 @@
 
 .nav-items{
     margin-top: 10px;
-    width: 9rem;
+    width: 10rem;
 }
 
 .nav-items:hover{
@@ -24,5 +31,10 @@
 
 .content{
     padding: 1rem;
+    padding-top: 5rem;
 }
-  
+
+.mat-badge-medium.mat-badge-above .mat-badge-content {
+    right: -20px;
+}
+
