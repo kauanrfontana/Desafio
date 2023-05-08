@@ -32,6 +32,8 @@
 .content{
     padding: 1rem;
     padding-top: 5rem;
+    flex: 1;
+    justify-content: center;
 }
 
 .mat-badge-medium.mat-badge-above .mat-badge-content {

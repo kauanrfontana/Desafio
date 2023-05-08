@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+//http request import
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -30,7 +33,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     UsersComponent,
     PostsComponent,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -46,10 +50,16 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatListModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    HttpClientModule,
+    
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule { 
+  
+}

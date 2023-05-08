@@ -1,5 +1,35 @@
-<mat-card class="card-content">
-    <mat-card-content >
+<mat-card class="card-container">
+    <mat-card-content class="card-content">
+        <span class="title">Usuários</span>
 
+        <a mat-mini-fab class="add"><mat-icon><b>add</b></mat-icon></a>
+
+        <mat-card class="card-container-inside">
+            <mat-card-content class="card-content-inside">
+                
+                <table>
+                  <thead>
+                    <th>id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Gênero</th>
+                    <th>Status</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of dados |async">
+                      <td>{{user.id}}</td>
+                      <td>{{user.name}}</td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.gender}}</td>
+                      <td>{{user.status}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                  
+                  
+
+            </mat-card-content>
+        </mat-card>
+        
     </mat-card-content>
 </mat-card>
