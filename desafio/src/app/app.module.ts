@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 //http request import
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 
@@ -53,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTabsModule,
     MatTableModule,
     HttpClientModule,
+    MatFormFieldModule
     
 
   ],

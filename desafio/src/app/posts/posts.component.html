@@ -1,5 +1,45 @@
 <mat-card class="card-container">
-  <mat-card-content >
+  <mat-card-content class="card-content">
       <span class="title">Postagens</span>
+
+      <a mat-mini-fab class="add"><mat-icon><b>add</b></mat-icon></a>
+
+      <mat-card class="card-container-inside">
+          <mat-card-content class="card-content-inside">
+              
+              <!-- Tabela Lista os usuários enviados pela api -->
+              <table mat-table [dataSource]="dados" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef class="align-center table-header"> Id </th>
+                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="user_id">
+                  <th mat-header-cell *matHeaderCellDef class="align-center"> Id do Usuário </th>
+                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.user_id}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="title">
+                  <th mat-header-cell *matHeaderCellDef class="align-center"> Título </th>
+                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.title}} </td>
+                </ng-container> 
+
+                <ng-container matColumnDef="body">
+                  <th mat-header-cell *matHeaderCellDef class="align-center"> Descrição </th>
+                  <td mat-cell *matCellDef="let element" style="align-items: center;"> <div class="scrollable-text">{{element.body}}</div> </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              
+                
+                
+
+          </mat-card-content>
+      </mat-card>
+      
   </mat-card-content>
 </mat-card>

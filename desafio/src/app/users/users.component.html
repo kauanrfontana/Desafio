@@ -7,24 +7,39 @@
         <mat-card class="card-container-inside">
             <mat-card-content class="card-content-inside">
                 
-                <table>
-                  <thead>
-                    <th>id</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Gênero</th>
-                    <th>Status</th>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let user of dados |async">
-                      <td>{{user.id}}</td>
-                      <td>{{user.name}}</td>
-                      <td>{{user.email}}</td>
-                      <td>{{user.gender}}</td>
-                      <td>{{user.status}}</td>
-                    </tr>
-                  </tbody>
+                <!-- Tabela Lista os usuários enviados pela api -->
+                <table mat-table [dataSource]="dados" class="mat-elevation-z8">
+
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> Id </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                  </ng-container> 
+
+                  <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef> Gênero </th>
+                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+
+                
                   
                   
 
