@@ -27,7 +27,7 @@
 
                 <ng-container matColumnDef="body">
                   <th mat-header-cell *matHeaderCellDef class="align-center"> Descrição </th>
-                  <td mat-cell *matCellDef="let element" style="align-items: center;"> <div class="scrollable-text">{{element.body}}</div> </td>
+                  <td mat-cell *matCellDef="let element" class="cell-description"> {{element.body}} </td>
                 </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

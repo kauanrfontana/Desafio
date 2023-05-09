@@ -18,7 +18,7 @@
 }
 
 .add{
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.6rem;
     align-self: flex-end;
 }
 
@@ -35,3 +35,16 @@
 .card-content-inside{
     flex: 1;
 }
+
+.align-center{
+    text-align: center;
+  }
+  
+  .table-header{
+    width: 200px;
+    text-align: center;
+  }
+  
+  .table-row{
+    text-align: center;
+  }
