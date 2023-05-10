@@ -17,12 +17,17 @@
     margin-bottom: 0.5rem;
 }
 
-.add{
+.container-actions{
+    display: flex;
     margin-bottom: 0.6rem;
     align-self: flex-end;
 }
 
-.add:hover{
+.container-actions > a {
+    margin: 0 0.2rem 0 0.2rem
+  }
+
+.action-button:hover{
     scale: 1.02;
 }
 
@@ -47,4 +52,24 @@
   
   .table-row{
     text-align: center;
+  }
+
+  .table-controllers{
+    display: flex;
+    padding-top: 0.6rem;
+  }
+
+  .select-per-page{
+    flex: .13
+  }
+
+  .text-pages{
+    margin-left: 0.5rem;
+    align-self: baseline;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  #page{
+    color: #8400ff
   }

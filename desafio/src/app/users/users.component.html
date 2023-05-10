@@ -2,7 +2,10 @@
     <mat-card-content class="card-content">
         <span class="title">Usuários</span>
 
-        <a mat-mini-fab class="add"><mat-icon><b>add</b></mat-icon></a>
+        <div class="container-actions">
+          <a mat-mini-fab class="remove action-button" color="warn"><mat-icon><b>remove</b></mat-icon></a>
+          <a mat-mini-fab class="add action-button" color="primary"><mat-icon><b>add</b></mat-icon></a>
+        </div>
 
         <mat-card class="card-container-inside">
             <mat-card-content class="card-content-inside">
@@ -38,6 +41,26 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
+
+                <div class="table-controllers">
+                  <mat-form-field class="select-per-page">
+                    <mat-label>por página:</mat-label>
+                    <mat-select [(value)]="per_page" (selectionChange)="paginate()">
+                      <mat-option value="5">5</mat-option>
+                      <mat-option value="10">10</mat-option>
+                      <mat-option value="15">15</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="page-controllers">
+                    <span class="text-pages">Página <span id="page">{{pages}}</span></span>
+                    <a mat-icon-button class="action-button" (click)="paginate(-1)" [disabled]="inFirstPage"><mat-icon>arrow_back_ios</mat-icon></a>
+                    <a mat-icon-button class="action-button" (click)="paginate(1)"><mat-icon>arrow_forward_ios</mat-icon></a>
+                  </div>
+                </div>
+                
+               
+
+      
 
                 
                   
