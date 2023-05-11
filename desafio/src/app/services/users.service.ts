@@ -34,4 +34,6 @@ export class UsersService {
 
     return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users?page=${ChangedPage}&per_page=${ChangedPer_page}`, requestOptions);
   }
+
+  
 }

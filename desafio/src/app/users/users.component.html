@@ -11,30 +11,30 @@
             <mat-card-content class="card-content-inside">
                 
                 <!-- Tabela Lista os usuários enviados pela api -->
-                <table mat-table [dataSource]="dados" class="mat-elevation-z8">
+                <table mat-table [dataSource]="dados">
 
                   <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef class="align-center"> Id </th>
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Id </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
                   </ng-container>
                 
                   <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="align-center"> Name </th>
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Name </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.name}} </td>
                   </ng-container>
                 
                   <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef class="align-center"> Email </th>
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Email </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.email}} </td>
                   </ng-container> 
 
                   <ng-container matColumnDef="gender">
-                    <th mat-header-cell *matHeaderCellDef class="align-center"> Gênero </th>
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Gênero </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.gender}} </td>
                   </ng-container>
                 
                   <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef class="align-center"> Status </th>
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Status </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.status}} </td>
                   </ng-container>
                 
@@ -53,8 +53,10 @@
                   </mat-form-field>
                   <div class="page-controllers">
                     <span class="text-pages">Página <span id="page">{{pages}}</span></span>
-                    <a mat-icon-button class="action-button" (click)="paginate(-1)" [disabled]="inFirstPage"><mat-icon>arrow_back_ios</mat-icon></a>
-                    <a mat-icon-button class="action-button" (click)="paginate(1)"><mat-icon>arrow_forward_ios</mat-icon></a>
+                    <a mat-icon-button class="pagination-button"  (click)="paginate('first')" [disabled]="inFirstPage"><mat-icon class="icon-lf-changer">first_page</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(-1)" [disabled]="inFirstPage"><mat-icon class="icon-unit-changer">arrow_back_ios</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(1)" [disabled]="inLastPage"><mat-icon class="icon-unit-changer">arrow_forward_ios</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
                   </div>
                 </div>
                 
