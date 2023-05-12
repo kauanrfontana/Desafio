@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -17,18 +17,35 @@ export class UsersService {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`
-    });
+    })
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
 
     const requestOptions = { headers: headers };
 
     return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users?page=${this.page}&per_page=${this.per_page}`, requestOptions);
   }
 
+  getFiltered(toFilterId): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.key}`
+    })
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
+
+    const requestOptions = { headers: headers };
+
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users/${toFilterId}?page=1&per_page=10`, requestOptions);
+  }
+
   getPagination(ChangedPage, ChangedPer_page): Observable<any> {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`
-    });
+    })
+    .set('content-type', 'application/json')
+    .set('Access-Control-Allow-Origin', '*');
 
     const requestOptions = { headers: headers };
 

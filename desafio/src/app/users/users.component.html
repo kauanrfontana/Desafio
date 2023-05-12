@@ -2,10 +2,28 @@
     <mat-card-content class="card-content">
         <span class="title">Usuários</span>
 
-        <div class="container-actions">
-          <a mat-mini-fab class="remove action-button" color="warn"><mat-icon><b>remove</b></mat-icon></a>
-          <a mat-mini-fab class="add action-button" color="primary"><mat-icon><b>add</b></mat-icon></a>
+        
+        <div class="controllers-top">
+
+            <span *ngIf="filterVisible" class="filter">
+              <mat-form-field class="filter-input">
+                <mat-label>Id</mat-label>
+                <input matInput type="text" class="mat-input-element" placeholder="Ex. 1585660" #myInput (input)="toFilterId = myInput.value">
+              </mat-form-field>
+              <div class="filter-button">
+                <a mat-mini-fab class="filter-icon action-button" color="accent" (click)="filter(toFilterId)"><mat-icon>search</mat-icon></a>
+                <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()"><mat-icon>clear</mat-icon></a>
+              </div>
+            </span>
+          <div class="container-actions">
+            <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>           
+            
+            <a mat-mini-fab class="remove-icon action-button" color="warn"><mat-icon>remove</mat-icon></a>
+            <a mat-mini-fab class="add-icon action-button" color="primary"><mat-icon>add</mat-icon></a>
+          </div>
+
         </div>
+        
 
         <mat-card class="card-container-inside">
             <mat-card-content class="card-content-inside">
@@ -42,6 +60,7 @@
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
 
+                <!-- Controles de paginação -->
                 <div class="table-controllers">
                   <mat-form-field class="select-per-page">
                     <mat-label>por página:</mat-label>
@@ -53,21 +72,13 @@
                   </mat-form-field>
                   <div class="page-controllers">
                     <span class="text-pages">Página <span id="page">{{pages}}</span></span>
-                    <a mat-icon-button class="pagination-button"  (click)="paginate('first')" [disabled]="inFirstPage"><mat-icon class="icon-lf-changer">first_page</mat-icon></a>
-                    <a mat-icon-button class="pagination-button" (click)="paginate(-1)" [disabled]="inFirstPage"><mat-icon class="icon-unit-changer">arrow_back_ios</mat-icon></a>
-                    <a mat-icon-button class="pagination-button" (click)="paginate(1)" [disabled]="inLastPage"><mat-icon class="icon-unit-changer">arrow_forward_ios</mat-icon></a>
-                    <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
+                    <a mat-icon-button class="pagination-button"  (click)="paginate('first')" [disabled]="inFirstPage || filtered"><mat-icon class="icon-lf-changer">first_page</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(-1)" [disabled]="inFirstPage || filtered"><mat-icon class="icon-unit-changer">arrow_back_ios</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(1)" [disabled]="inLastPage || filtered"><mat-icon class="icon-unit-changer">arrow_forward_ios</mat-icon></a>
+                    <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage || filtered"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
                   </div>
                 </div>
                 
-               
-
-      
-
-                
-                  
-                  
-
             </mat-card-content>
         </mat-card>
         

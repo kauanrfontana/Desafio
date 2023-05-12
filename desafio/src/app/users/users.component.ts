@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { firstValueFrom } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -8,12 +9,16 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit{
-  dados: any;
+  dados: any = [];
   per_page = '10';
   pages = 1;
   inFirstPage = true;
   inLastPage = false;
-  maxPage: number = 280;
+  maxPage: number = 166;
+
+  toFilterId = '';
+  filterVisible = false;
+  filtered = false;
 
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
 
@@ -49,6 +54,29 @@ export class UsersComponent implements OnInit{
       .catch(()=>{
         alert('error')
       })
+  }
+
+  async filter(toFilterId:string){
+    let data = await firstValueFrom(await this.usersService.getFiltered(toFilterId));
+    this.dados = [data];
+    this.filtered = true;
+  }
+
+  async clearFilter(){
+    this.filtered = false;
+    await firstValueFrom(this.dados = this.usersService.getUsers())
+      .catch(()=>{
+        alert('error')
+      });
+  }
+
+  showFilter(){
+    if(this.filterVisible == false){
+      this.filterVisible = true
+    } else{
+      this.filterVisible = false
+    }
+
   }
 
 
