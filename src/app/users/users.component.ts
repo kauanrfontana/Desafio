@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { firstValueFrom } from 'rxjs';
-import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-users',
@@ -19,6 +19,8 @@ export class UsersComponent implements OnInit{
   toFilterId = '';
   filterVisible = false;
   filtered = false;
+
+  modalDelete = false;
 
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
 
@@ -76,7 +78,14 @@ export class UsersComponent implements OnInit{
     } else{
       this.filterVisible = false
     }
+  }
 
+  showModalDelete(){
+    if(this.modalDelete == false){
+      this.modalDelete = true
+    } else{
+      this.modalDelete = false
+    }
   }
 
 

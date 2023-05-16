@@ -29,6 +29,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { CreateUserComponent } from './users/create-user/create-user.component';
+import { DeleteUserComponent } from './users/delete-user/delete-user.component';
+import { VisibleIfDirective } from './directives/visible-if.directive';
 
 
 
@@ -42,6 +45,9 @@ import { MatInputModule } from '@angular/material/input';
     PostsComponent,
     NavbarComponent,
     HeaderComponent,
+    CreateUserComponent,
+    DeleteUserComponent,
+    VisibleIfDirective,
     
   ],
   imports: [
