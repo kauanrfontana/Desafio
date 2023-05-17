@@ -22,7 +22,9 @@ export class UsersComponent implements OnInit{
   filtered = false;
 
   modalDelete = false;
-  msgdel = false
+  msgdel = false;
+  deleteError = "";
+  hideModal = false;
 
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
 
@@ -69,7 +71,7 @@ export class UsersComponent implements OnInit{
     }, 100);
   }
 
-  async filter(toFilterId:string){
+  async filter(toFilterId:number){
     this.dados = null
     this.loading = true;
 
@@ -101,12 +103,23 @@ export class UsersComponent implements OnInit{
   }
 
   showModalDelete(){
-    this.modalDelete = this.modalDelete == false;
+    this.hideModal = true;
+    setTimeout(() => {
+      this.modalDelete = this.modalDelete == false;
+    }, 1000);
   }
 
   deleteMsg(result: string){
-    console.log('Dados recebidos:', result);
-    
+    if(result === 'success'){
+      this.msgdel = !this.msgdel;
+    } else{
+      this.msgdel = !this.msgdel;
+      this.deleteError = result;
+    }
+
+    setTimeout(() => {
+      this.msgdel = false
+    }, 5000);
   }
   
 }

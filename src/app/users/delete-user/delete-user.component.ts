@@ -10,18 +10,18 @@ export class DeleteUserComponent {
     @Output() eventMsgDelete = new EventEmitter()
   
 
-    delId: string = "";
+    delId: number = null;
     msgdel: boolean = false;
     result: string;
 
     constructor(private usersService: UsersService){}
 
 
-    deleteUser(delId:string){
+    deleteUser(delId:number){
         this.usersService.deleteUser(delId).subscribe(
             () => {
               console.log('Usuário excluído com sucesso');
-              this.eventMsgDelete.emit("Success");
+              this.eventMsgDelete.emit("success");
               // Lógica adicional após a exclusão do usuário
             },
             (error) => {

@@ -1,12 +1,12 @@
-<div class="modal-input">
+<div class="modal-delete">
         <h2>Digite o id do usuário que deseja deletar:</h2>
         <div class="controllers-delete">
             <form>
                 <mat-form-field class="input-delete">
                     <mat-label>id do Usuário</mat-label>
-                    <input matInput type="text" #myInput (input)="delId = myInput.value" class="mat-input-element" placeholder="Ex. 1585660" >
+                    <input matInput type="number" #myInput (input)="delId = myInput.value" class="mat-input-element" required>
                 </mat-form-field>
-                <button type="submit" mat-mini-fab class="button-delete" color="warn" (click)="deleteUser(delId)"><mat-icon>delete_sweep</mat-icon></button>
+                <button type="submit" mat-mini-fab class="button-delete" color="warn" [disabled]="!delId" (click)="deleteUser(delId)"><mat-icon>delete_sweep</mat-icon></button>
             </form>
         </div>
 </div>

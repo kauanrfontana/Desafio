@@ -1,4 +1,4 @@
-.modal-input{
+.modal-delete{
     display: flex;
     background: #fff;
     border-radius: 8px;
@@ -12,7 +12,22 @@
     z-index: 11;
     flex-direction: column;
     padding: 0;
+    animation: show 1s;
   }
+
+.hide{
+    animation: hide 1s;/* usar esta classe para fazer o modal sumir como ele aparece inversamente */
+}
+
+@keyframes show {
+    0% {transform: translate(-25%, -300%)}
+    100% {transform: translate(-25%, -50%)}
+}
+
+@keyframes hide {
+    0% {transform: translate(-25%, -50%)}
+    100% {transform: translate(-25%, -300%)}
+}
 
 .overlay {
     background: #000;
@@ -30,9 +45,18 @@
     margin-left: 1rem;
 }
 
-/* .input-delete{
+/* .mat-input-element{
     
 } */
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+}
 
 .button-delete:hover{
     scale: 1.32;
