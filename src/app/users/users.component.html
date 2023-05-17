@@ -2,7 +2,11 @@
     <mat-card-content class="card-content">
         <span class="title">Usuários</span>
 
-        <app-delete-user *ngIf="modalDelete"></app-delete-user>
+        <app-delete-user *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload(); showModalDelete()"> </app-delete-user>
+        <div class="msg-deleted" *ngIf="msgdel">
+          <h3 class="text-msg-delete">Usuário excluído com sucesso!</h3>
+        </div>
+     
         <div class="controllers-top">
 
             <span *ngIf="filterVisible" class="filter">
@@ -28,39 +32,41 @@
             <mat-card-content class="card-content-inside">
 
               
-                
-                <!-- Tabela Lista os usuários enviados pela api -->
-                <table mat-table [dataSource]="dados">
+                <div class="inTable">
+                  <!-- Tabela Lista os usuários enviados pela api -->
+                  <table mat-table [dataSource]="dados">
 
-                  <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Id </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
-                  </ng-container>
-                
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Name </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.name}} </td>
-                  </ng-container>
-                
-                  <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Email </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.email}} </td>
-                  </ng-container> 
+                    <ng-container matColumnDef="id">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Id </th>
+                      <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Name </th>
+                      <td mat-cell *matCellDef="let element" class="table-row"> {{element.name}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="email">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Email </th>
+                      <td mat-cell *matCellDef="let element" class="table-row"> {{element.email}} </td>
+                    </ng-container> 
 
-                  <ng-container matColumnDef="gender">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Gênero </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.gender}} </td>
-                  </ng-container>
+                    <ng-container matColumnDef="gender">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Gênero </th>
+                      <td mat-cell *matCellDef="let element" class="table-row"> {{element.gender}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Status </th>
+                      <td mat-cell *matCellDef="let element" class="table-row"> {{element.status}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <div class="loader" *ngIf="loading"></div>
+                </div>
                 
-                  <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Status </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.status}} </td>
-                  </ng-container>
-                
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-
                 <!-- Controles de paginação -->
                 <div class="table-controllers">
                   <mat-form-field class="select-per-page">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { firstValueFrom } from 'rxjs';
 
@@ -15,79 +15,98 @@ export class UsersComponent implements OnInit{
   inFirstPage = true;
   inLastPage = false;
   maxPage: number = 166;
+  loading: boolean = false;
 
   toFilterId = '';
   filterVisible = false;
   filtered = false;
 
   modalDelete = false;
+  msgdel = false
 
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
 
   constructor(private usersService: UsersService){}
 
   async ngOnInit(){
+    this.loading = true;
     await firstValueFrom(this.dados = this.usersService.getUsers())
-      .catch(()=>{
-        alert('error')
+        .then(() => {this.loading = !this.loading})
+        .catch(()=>{
+          alert('error')
       })
   }
 
+  async reload(){
+        this.dados = null;
+        this.loading = true;
+        await setTimeout(() => {
+           firstValueFrom(this.dados = this.usersService.getUsers())
+            .then(() => {this.loading = !this.loading});
+        }, 1000);
+        
+  }
+
   async paginate(add = null){
+    this.dados = null;
+    this.loading = true;
+
     if (add != null && add != 'first'){
       this.pages += parseInt(add);
     } else if(add = 'first'){
       this.pages = 1;
     }
 
-    if (this.pages == this.maxPage){
-      this.inLastPage = true
-    } else{
-      this.inLastPage = false
-    }
+    this.inFirstPage = this.pages === 1;
+    this.inLastPage = this.pages === this.maxPage;
 
-    if (this.pages == 1){
-      this.inFirstPage = true
-    } else{
-      this.inFirstPage = false
-    }
-
-    await firstValueFrom(this.dados = this.usersService.getPagination(this.pages, this.per_page))
-      .catch(()=>{
-        alert('error')
-      })
+    await setTimeout(() => {
+      firstValueFrom(this.dados = this.usersService.getPagination(this.pages, this.per_page))
+        .then(() => {this.loading = !this.loading})
+        .catch(()=>{
+          alert('error')
+      });
+    }, 100);
   }
 
   async filter(toFilterId:string){
+    this.dados = null
+    this.loading = true;
+
     let data = await firstValueFrom(await this.usersService.getFiltered(toFilterId));
-    this.dados = [data];
-    this.filtered = true;
+
+    setTimeout(() => {
+      this.loading = !this.loading;
+      this.dados = [data];
+      this.filtered = true;
+    }, 1000);
   }
 
   async clearFilter(){
     this.filtered = false;
-    await firstValueFrom(this.dados = this.usersService.getUsers())
-      .catch(()=>{
-        alert('error')
+    this.dados = null;
+    this.loading = true;
+
+    await setTimeout(() => {
+      firstValueFrom(this.dados = this.usersService.getUsers())
+        .then(() => {this.loading = !this.loading})
+        .catch(()=>{
+          alert('error')
       });
+    }, 100);
   }
 
   showFilter(){
-    if(this.filterVisible == false){
-      this.filterVisible = true
-    } else{
-      this.filterVisible = false
-    }
+    this.filterVisible = this.filterVisible == false;
   }
 
   showModalDelete(){
-    if(this.modalDelete == false){
-      this.modalDelete = true
-    } else{
-      this.modalDelete = false
-    }
+    this.modalDelete = this.modalDelete == false;
   }
 
-
+  deleteMsg(result: string){
+    console.log('Dados recebidos:', result);
+    
+  }
   
 }
