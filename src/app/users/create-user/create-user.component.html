@@ -1,6 +1,13 @@
 <div class="modal-create">
+    <h1 class="title">Cadastro de Usuário</h1>
     <mat-form-field>
-        
+        <mat-label style="color: black;">Nome do usuário</mat-label>
+        <input matInput type="text" #myInput (input)="data.name = myInput.value" class="mat-input-element" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="text" #myInput (input)="data.name = myInput.value" class="mat-input-element" required>
     </mat-form-field>
 </div>
 <div class="overlay"></div>

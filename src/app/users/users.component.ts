@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit{
   maxPage: number = 166;
   loading: boolean = false;
 
-  toFilterId = '';
+  userName = '';
   filterVisible = false;
   filtered = false;
 
@@ -25,6 +25,8 @@ export class UsersComponent implements OnInit{
   msgdel = false;
   deleteError = "";
   hideModal = false;
+
+  modalCreate = false;
 
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
 
@@ -71,16 +73,20 @@ export class UsersComponent implements OnInit{
     }, 100);
   }
 
-  async filter(toFilterId:number){
+  async filter(userName:string){
     this.dados = null
     this.loading = true;
 
-    let data = await firstValueFrom(await this.usersService.getFiltered(toFilterId));
-
     setTimeout(() => {
-      this.loading = !this.loading;
-      this.dados = [data];
-      this.filtered = true;
+      firstValueFrom(this.dados = this.usersService.getFiltered(userName))
+        .then((data) => {
+          console.log(data.length)
+          this.loading = !this.loading; 
+          this.filtered = true;
+        })
+        .catch(()=>{
+          alert('error')
+      });
     }, 1000);
   }
 
@@ -103,10 +109,11 @@ export class UsersComponent implements OnInit{
   }
 
   showModalDelete(){
-    this.hideModal = true;
-    setTimeout(() => {
-      this.modalDelete = this.modalDelete == false;
-    }, 1000);
+    this.modalDelete = this.modalDelete == false;
+  }
+
+  showModalCreate(){
+    this.modalCreate = this.modalCreate == false;
   }
 
   deleteMsg(result: string){

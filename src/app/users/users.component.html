@@ -2,32 +2,34 @@
     <mat-card-content class="card-content">
         <span class="title">Usuários</span>
 
-        <app-delete-user *ngIf="modalDelete" /*[class.hide]=""*/ (eventMsgDelete)="deleteMsg($event); reload(); showModalDelete()"> </app-delete-user>
+        <app-delete-user *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload(); showModalDelete()"> </app-delete-user>
         <div class="msg-deleted" *ngIf="msgdel">
 
           <h3 class="text-success-delete" *ngIf="deleteError == ''">Usuário excluído com sucesso!</h3>
 
-          <h3 class="text-error-delete" *ngIf="deleteError != ''">Usuário NÃO excluído ( {{deleteError}} )</h3>
+          <h3 class="text-error-delete" *ngIf="deleteError != ''">Usuário NÃO excluído [ {{deleteError}} ]</h3>
 
         </div>
+
+        <app-create-user *ngIf="modalCreate"></app-create-user>
      
         <div class="controllers-top">
 
             <span *ngIf="filterVisible" class="filter">
               <mat-form-field class="filter-input">
-                <mat-label>Id</mat-label>
-                <input matInput type="number" class="mat-input-element" #myInput (input)="toFilterId = myInput.value">
+                <mat-label>Nome</mat-label>
+                <input matInput type="text" class="mat-input-element" #myInput (input)="userName = myInput.value">
               </mat-form-field>
               <div class="filter-button">
-                <a mat-mini-fab class="filter-icon action-button" color="accent" [disabled]="!toFilterId" (click)="filter(toFilterId)"><mat-icon>search</mat-icon></a>
-                <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()"><mat-icon>clear</mat-icon></a>
+                <a mat-mini-fab class="filter-icon action-button" color="accent" [disabled]="!userName" (click)="filter(userName)"><mat-icon>search</mat-icon></a>
+                <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()" [disabled]="!userName && !filtered"><mat-icon>clear</mat-icon></a>
               </div>
             </span>
           <div class="container-actions">
             <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>           
             
             <a mat-mini-fab class="remove-icon action-button" color="warn" (click)="showModalDelete()"><mat-icon>remove</mat-icon></a>
-            <a mat-mini-fab class="add-icon action-button" color="primary"><mat-icon>add</mat-icon></a>
+            <a mat-mini-fab class="add-icon action-button" (click)="showModalCreate()"><mat-icon>add</mat-icon></a>
           </div>
 
         </div>
@@ -75,7 +77,7 @@
                 <div class="table-controllers">
                   <mat-form-field class="select-per-page">
                     <mat-label>por página:</mat-label>
-                    <mat-select [(value)]="per_page" (selectionChange)="paginate()">
+                    <mat-select [(value)]="per_page" (selectionChange)="paginate()" [disabled]="filtered">
                       <mat-option value="5">5</mat-option>
                       <mat-option value="10">10</mat-option>
                       <mat-option value="15">15</mat-option>
