@@ -32,6 +32,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { DeleteUserComponent } from './users/delete-user/delete-user.component';
 import { VisibleIfDirective } from './directives/visible-if.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -73,7 +74,8 @@ import { VisibleIfDirective } from './directives/visible-if.directive';
     MatSelectModule,
     FormsModule,
     MatOptionModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
     
 
   ],

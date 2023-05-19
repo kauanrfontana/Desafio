@@ -10,21 +10,54 @@ import { User } from 'src/app/interfaces/user';
 })
 
 export class CreateUserComponent {
+  @Output() exitCreate = new EventEmitter();
   @Output() eventMsgCreate = new EventEmitter();
 
   emailControl = new FormControl('', [Validators.required, Validators.email]);
+  nameControl = new FormControl('', [Validators.required]);
+  genderControl = new FormControl('', [Validators.required]);
 
-  name: string;
-  email: string;
-  gender: string;
-  status: string;
 
-  data: User;
+  data: User ={
+    "name": "",
+    "email": "",
+    "gender": "",
+    "status": ""
+  };
+  
 
   constructor(private usersService: UsersService){}
 
   newUser(){
-    this.usersService.createUser(this.data)
+    this.data.status = 'active';
+    this.usersService.createUser(this.data).subscribe(
+      () => {
+        console.log('Usuário cadastrado com sucesso');
+        this.eventMsgCreate.emit("success");
+        this.exitCreate.emit();
+        // Lógica adicional após a exclusão do usuário
+      },
+      (error) => {
+        console.error('Erro ao cadastrar usuário', error);
+        let erro: string;
+        if(error.ok === false){
+          erro = "usuário não cadastrado!"
+        }
+        this.eventMsgCreate.emit(erro);
+        this.exitCreate.emit();
+  
+      }
+    );
+  }
+
+  getErrorMessage(campo) {
+    if (campo.hasError('required')) {
+      return 'Campo obrigatório!';
+    } else if(campo.hasError('email')){
+      return 'email inválido';
+    }
+
+    return '';
   }
 
 }

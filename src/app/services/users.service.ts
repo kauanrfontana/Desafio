@@ -11,15 +11,16 @@ export class UsersService {
   key: string = '10c9e9a940fc2c262c2f592bd408c23328ad9800ec9e880be276c5529a1f99ab';
   page: number = 1;
   per_page: number = 10;
+  
   constructor(private httpClient: HttpClient) { }
 
   getUsers(): Observable<any> {
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.key}`
-    })
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
 
     const requestOptions = { headers: headers };
 
@@ -29,10 +30,10 @@ export class UsersService {
   getFiltered(userName): Observable<any> {
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.key}`
-    })
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
 
     const requestOptions = { headers: headers };
 
@@ -42,10 +43,10 @@ export class UsersService {
   getPagination(ChangedPage, ChangedPer_page): Observable<any> {
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.key}`
-    })
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
 
     const requestOptions = { headers: headers };
 
@@ -54,10 +55,10 @@ export class UsersService {
 
   deleteUser(id:number): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.key}`
-    })
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
 
     const requestOptions = { headers: headers };
 
@@ -67,13 +68,13 @@ export class UsersService {
   createUser(data): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`,
-    })
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
 
     const requestOptions = { headers: headers };
 
-    return this.httpClient.post<any>(`https://gorest.co.in/public/v2/users/`, requestOptions, data);
+    return this.httpClient.post<any>(`https://gorest.co.in/public/v2/users/`, data, requestOptions);
   }
 
 

@@ -11,7 +11,7 @@
 
         </div>
 
-        <app-create-user *ngIf="modalCreate"></app-create-user>
+        <app-create-user *ngIf="modalCreate" (exitCreate)="showModalCreate()" (eventMsgCreate)="reload()"></app-create-user>
      
         <div class="controllers-top">
 
