@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { UsersService } from '../../services/users.service';
+import { PostsService } from '../../services/posts.service';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms'
-import { User } from 'src/app/interfaces/user';
+import { Post } from 'src/app/interfaces/post';
+
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.css']
 })
-
-export class CreateUserComponent {
+export class CreatePostComponent {
   @Output() exitCreate = new EventEmitter();
   @Output() eventMsgCreate = new EventEmitter();
 
@@ -18,7 +18,7 @@ export class CreateUserComponent {
   genderControl = new FormControl('', [Validators.required]);
 
 
-  data: User ={
+  data: Post ={
     "name": "",
     "email": "",
     "gender": "",
@@ -26,19 +26,19 @@ export class CreateUserComponent {
   };
   
 
-  constructor(private usersService: UsersService){}
+  constructor(private postsService: PostsService){}
 
-  newUser(){
+  newPost(){
     this.data.status = 'active';
-    this.usersService.createUser(this.data).subscribe(
+    this.postsService.createPost(this.data).subscribe(
       () => {
-        console.log('Usuário cadastrado com sucesso');
+        console.log('Post cadastrado com sucesso');
         this.eventMsgCreate.emit("success");
         this.exitCreate.emit();
         // Lógica adicional após a exclusão do usuário
       },
       (error) => {
-        console.error('Erro ao cadastrar usuário', error);
+        console.error('Erro ao cadastrar post', error);
         let erro: string;
         if(error.ok === false){
           erro = "cadastrado inválido!"

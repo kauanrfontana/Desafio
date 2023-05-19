@@ -40,6 +40,19 @@ export class UsersService {
     return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users?name=${userName}`, requestOptions);
   }
 
+  getUserName(userId): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    const requestOptions = { headers: headers };
+
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users/${userId}`, requestOptions);
+  }
+
   getPagination(ChangedPage, ChangedPer_page): Observable<any> {
 
     const headers = new HttpHeaders({

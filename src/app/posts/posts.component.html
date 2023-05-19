@@ -1,39 +1,95 @@
 <mat-card class="card-container">
   <mat-card-content class="card-content">
       <span class="title">Postagens</span>
-      
-      <a mat-mini-fab class="add"><mat-icon><b>add</b></mat-icon></a>
+
+      <app-delete-user *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-user>
+      <div class="msg-deleted" *ngIf="msgdel">
+
+          <h3 class="text-success-delete" *ngIf="deleteError == ''">Usuário excluído com sucesso!</h3>
+
+          <h3 class="text-error-delete" *ngIf="deleteError != ''">Usuário NÃO excluído [ {{deleteError}} ]</h3>
+
+      </div>
+
+      <app-create-user *ngIf="modalCreate" (exitCreate)="showModalCreate()" (eventMsgCreate)="reload()"></app-create-user>
+
+      <div class="controllers-top">
+
+        <span *ngIf="filterVisible" class="filter">
+          <mat-form-field class="filter-input">
+            <mat-label>Nome</mat-label>
+            <input matInput type="text" class="mat-input-element" #myInput (input)="userName = myInput.value">
+          </mat-form-field>
+          <div class="filter-button">
+            <a mat-mini-fab class="filter-icon action-button" color="accent" [disabled]="!userName" (click)="filter(userName)"><mat-icon>search</mat-icon></a>
+            <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()" [disabled]="!userName && !filtered"><mat-icon>clear</mat-icon></a>
+          </div>
+        </span>
+
+        <div class="container-actions">
+          <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>           
+          
+          <a mat-mini-fab class="remove-icon action-button" color="warn" (click)="showModalDelete()"><mat-icon>remove</mat-icon></a>
+          <a mat-mini-fab class="add-icon action-button" (click)="showModalCreate()"><mat-icon>add</mat-icon></a>
+        </div>
+
+      </div>
 
       <mat-card class="card-container-inside">
           <mat-card-content class="card-content-inside">
               
+              <div class="inTable">
               <!-- Tabela Lista os usuários enviados pela api -->
-              <table mat-table [dataSource]="dados" class="mat-elevation-z8">
+                <table mat-table [dataSource]="dados" class="mat-elevation-z8">
 
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef class="align-center table-header"> Id </th>
-                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="user_id">
-                  <th mat-header-cell *matHeaderCellDef class="align-center"> Id do Usuário </th>
-                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.user_id}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="title">
-                  <th mat-header-cell *matHeaderCellDef class="align-center"> Título </th>
-                  <td mat-cell *matCellDef="let element" class="table-row"> {{element.title}} </td>
-                </ng-container> 
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Id </th>
+                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="user_id">
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Id do Usuário </th>
+                    <td mat-cell *matCellDef="let element" class="table-row"> 
+                      <mat-icon class="show-name" (click)="userPost(element.user_id)">swap_horizontal_circle</mat-icon> 
+                      <span>{{element.user_id}}</span>
+                      <span *ngIf="element.user_id == this.userId">{{this.userName}}</span> 
+                    </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Título </th>
+                    <td mat-cell *matCellDef="let element" class="table-row"> {{element.title}} </td>
+                  </ng-container> 
 
-                <ng-container matColumnDef="body">
-                  <th mat-header-cell *matHeaderCellDef class="align-center"> Descrição </th>
-                  <td mat-cell *matCellDef="let element" class="cell-description"> {{element.body}} </td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
+                  <ng-container matColumnDef="body">
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Descrição </th>
+                    <td mat-cell *matCellDef="let element" class="cell-description"> <span class="scrollable">{{element.body}}</span> </td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div class="loader" *ngIf="loading"></div>
+            </div>
 
+            <!-- Controles de paginação -->
+            <div class="table-controllers">
+              <mat-form-field class="select-per-page">
+                <mat-label>por página:</mat-label>
+                <mat-select [(value)]="per_page" (selectionChange)="paginate()" [disabled]="filtered">
+                  <mat-option value="5">5</mat-option>
+                  <mat-option value="10">10</mat-option>
+                  <mat-option value="15">15</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="page-controllers">
+                <span class="text-pages">Página <span id="page">{{pages}}</span></span>
+                <a mat-icon-button class="pagination-button"  (click)="paginate('first')" [disabled]="inFirstPage || filtered"><mat-icon class="icon-lf-changer">first_page</mat-icon></a>
+                <a mat-icon-button class="pagination-button" (click)="paginate(-1)" [disabled]="inFirstPage || filtered"><mat-icon class="icon-unit-changer">arrow_back_ios</mat-icon></a>
+                <a mat-icon-button class="pagination-button" (click)="paginate(1)" [disabled]="inLastPage || filtered"><mat-icon class="icon-unit-changer">arrow_forward_ios</mat-icon></a>
+                <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage || filtered"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
+              </div>
+            </div>
               
                 
                 

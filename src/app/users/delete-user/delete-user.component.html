@@ -1,13 +1,14 @@
 <div class="modal-delete">
-        <h2>Digite o id do usuário que deseja deletar:</h2>
+        <a class="exit-button" (click)="this.exitDelete.emit()"><mat-icon>clear</mat-icon></a>
+        <h2 class="title">Excluir usuário:</h2>
         <div class="controllers-delete">
-            <form>
-                <mat-form-field class="input-delete">
-                    <mat-label>id do Usuário</mat-label>
-                    <input matInput type="number" #myInput (input)="delId = myInput.value" class="mat-input-element" required>
-                </mat-form-field>
-                <button type="submit" mat-mini-fab class="button-delete" color="warn" [disabled]="!delId" (click)="deleteUser(delId)"><mat-icon>delete_sweep</mat-icon></button>
-            </form>
+        
+            <mat-form-field class="input-delete">
+                <mat-label>id do Usuário</mat-label>
+                <input matInput type="number" #myInput (input)="delId = myInput.value" class="mat-input-element" required>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab class="button-delete" color="warn" [disabled]="!delId" (click)="deleteUser(delId)"><mat-icon>delete_sweep</mat-icon></button>
+            
         </div>
 </div>
-<div class="overlay"></div>
+<div class="overlay"  (click)="this.exitDelete.emit()"></div>
