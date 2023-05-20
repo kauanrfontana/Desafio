@@ -27,8 +27,8 @@
         </span>
 
         <div class="container-actions">
-          <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>           
-          
+          <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>
+
           <a mat-mini-fab class="remove-icon action-button" color="warn" (click)="showModalDelete()"><mat-icon>remove</mat-icon></a>
           <a mat-mini-fab class="add-icon action-button" (click)="showModalCreate()"><mat-icon>add</mat-icon></a>
         </div>
@@ -37,7 +37,7 @@
 
       <mat-card class="card-container-inside">
           <mat-card-content class="card-content-inside">
-              
+
               <div class="inTable">
               <!-- Tabela Lista os usuários enviados pela api -->
                 <table mat-table [dataSource]="dados" class="mat-elevation-z8">
@@ -46,26 +46,26 @@
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Id </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.id}} </td>
                   </ng-container>
-                
+
                   <ng-container matColumnDef="user_id">
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Id do Usuário </th>
-                    <td mat-cell *matCellDef="let element" class="table-row"> 
-                      <mat-icon class="show-name" (click)="userPost(element.user_id)">swap_horizontal_circle</mat-icon> 
+                    <td mat-cell *matCellDef="let element" class="table-row">
+                      <mat-icon class="show-name" (click)="userPost(element.user_id)">swap_horizontal_circle</mat-icon>
                       <span>{{element.user_id}}</span>
-                      <span *ngIf="element.user_id == this.userId">{{this.userName}}</span> 
+                      <span *ngIf="element.user_id == this.userId">{{this.userName}}</span>
                     </td>
                   </ng-container>
-                
+
                   <ng-container matColumnDef="title">
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Título </th>
                     <td mat-cell *matCellDef="let element" class="table-row"> {{element.title}} </td>
-                  </ng-container> 
+                  </ng-container>
 
                   <ng-container matColumnDef="body">
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Descrição </th>
                     <td mat-cell *matCellDef="let element" class="cell-description"> <span class="scrollable">{{element.body}}</span> </td>
                   </ng-container>
-                
+
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
@@ -90,12 +90,12 @@
                 <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage || filtered"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
               </div>
             </div>
-              
-                
-                
+
+
+
 
           </mat-card-content>
       </mat-card>
-      
+
   </mat-card-content>
 </mat-card>

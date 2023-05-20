@@ -41,17 +41,20 @@ export class PostsComponent implements OnInit {
     await firstValueFrom(this.dados = this.postsService.getPosts())
         .then(() => {this.loading = !this.loading})
         .catch(()=>{
-          alert('error')
+          alert('error');
       })
 
-    
+
   }
 
   async userPost(user_id){
     await firstValueFrom(this.usersService.getUserName(user_id))
       .then((data) => {this.userName = data.name; this.userId = data.id})
+      .catch((error) => {
+        if(error.status = "404") alert("Usúario não existe mais!");
+      })
 
-    
+
   }
 
   async reload(){
@@ -61,7 +64,7 @@ export class PostsComponent implements OnInit {
        firstValueFrom(this.dados = this.postsService.getPosts())
         .then(() => {this.loading = !this.loading});
     }, 1000);
-    
+
 }
 
 async paginate(add = null){
@@ -94,7 +97,7 @@ setTimeout(() => {
   firstValueFrom(this.dados = this.postsService.getFiltered(userName))
     .then((data) => {
       console.log(data.length)
-      this.loading = !this.loading; 
+      this.loading = !this.loading;
       this.filtered = true;
     })
     .catch(()=>{
@@ -143,7 +146,7 @@ setTimeout(() => {
 }
 
 
-  
+
 }
 
 
