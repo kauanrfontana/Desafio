@@ -32,6 +32,8 @@ export class PostsComponent implements OnInit {
 
   modalCreate = false;
 
+  visible = false;
+
   displayedColumns: string[] = ['id', 'user_id', 'title', 'body'];
 
   constructor(private postsService: PostsService, private usersService: UsersService){}
@@ -48,11 +50,17 @@ export class PostsComponent implements OnInit {
   }
 
   async userPost(user_id){
-    await firstValueFrom(this.usersService.getUserName(user_id))
-      .then((data) => {this.userName = data.name; this.userId = data.id})
+    if(!this.userName){
+      await firstValueFrom(this.usersService.getUserName(user_id))
+      .then((data) => {this.userName = data.name; this.userId = data.id; this.visible = !this.visible})
       .catch((error) => {
         if(error.status = "404") alert("Usúario não existe mais!");
       })
+    }else if(this.userName){
+      this.userName = null;
+      this.visible = false;
+    }
+   
 
 
   }

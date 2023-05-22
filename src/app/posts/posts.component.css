@@ -115,6 +115,7 @@
 }
 
 .show-name{
+  width: auto;
   vertical-align: middle;
   cursor: pointer;
 }
