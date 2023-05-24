@@ -13,8 +13,6 @@ export class DeleteUserComponent {
 
 
   delId: number = null;
-  msgdel: boolean = false;
-  result: string;
 
   constructor(private usersService: UsersService){}
 

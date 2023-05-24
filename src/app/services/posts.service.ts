@@ -11,7 +11,7 @@ export class PostsService {
   key: string = '10c9e9a940fc2c262c2f592bd408c23328ad9800ec9e880be276c5529a1f99ab';
   constructor(private httpClient: HttpClient) { }
 
-  getPosts(): Observable<any> {
+  getPosts(page: number = 1, per_page: string = '10'): Observable<any> {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`
@@ -19,10 +19,10 @@ export class PostsService {
 
     const requestOptions = { headers: headers };
 
-    return this.httpClient.get<any>('https://gorest.co.in/public/v2/posts', requestOptions);
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?page=${page}&per_page=${per_page}`, requestOptions);
   }
 
-  getFiltered(userName): Observable<any> {
+  getFilteredUser(userName, page: number = 1, per_page: string = '10'): Observable<any> {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`,
@@ -32,10 +32,10 @@ export class PostsService {
 
     const requestOptions = { headers: headers };
 
-    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?user_name=${userName}`, requestOptions);
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?user_name=${userName}&page=${page}&per_page=${per_page}`, requestOptions);
   }
 
-  getPagination(ChangedPage, ChangedPer_page): Observable<any> {
+  getFiltered(UserId, page: number = 1, per_page: string = '10'): Observable<any> {
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`,
@@ -45,10 +45,23 @@ export class PostsService {
 
     const requestOptions = { headers: headers };
 
-    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?page=${ChangedPage}&per_page=${ChangedPer_page}`, requestOptions);
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?user_id=${UserId}&page=${page}&per_page=${per_page}`, requestOptions);
   }
 
-  deleteUser(id:number): Observable<any> {
+  getPagination(page: number, per_page: string): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    const requestOptions = { headers: headers };
+
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?page=${page}&per_page=${per_page}`, requestOptions);
+  }
+
+  deletePost(id:number): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`,
       'content-type': 'application/json',

@@ -24,6 +24,8 @@ export class CreateUserComponent {
     "gender": "",
     "status": ""
   };
+
+  
   
 
   constructor(private usersService: UsersService){}
@@ -41,7 +43,7 @@ export class CreateUserComponent {
         console.error('Erro ao cadastrar usuário', error);
         let erro: string;
         if(error.ok === false){
-          erro = "cadastrado inválido!"
+          erro = "erro ao cadastrar usuário!"
         }
         this.eventMsgCreate.emit(erro);
         this.exitCreate.emit();

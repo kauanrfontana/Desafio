@@ -199,10 +199,42 @@
     animation: show-hide 10s;
   }
 
+  .msg-created{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #333;
+    
+    max-height: 60px;
+    position: fixed;
+    left: 90%;
+    top: 90%;
+    transform: translate(-55%);
+    padding: 24px;
+    z-index: 11;
+    flex-direction: row;
+    padding: 10px;
+    animation: show-hide 10s;
+  }
+
 .text-success-delete{
     white-space: nowrap;
     margin-top: 0.7rem;
     color: rgb(10, 165, 10);
+}
+
+.text-success-create{
+    white-space: nowrap;
+    margin-top: 0.7rem;
+    color: rgb(10, 165, 10);
+}
+
+.text-error-create{
+    white-space: nowrap;
+    margin-top: 0.7rem;
+    color: rgb(180, 46, 46);
 }
 
 .text-error-delete{

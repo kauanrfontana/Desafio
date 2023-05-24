@@ -35,7 +35,7 @@ import { VisibleIfDirective } from './directives/visible-if.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -79,7 +79,8 @@ import { DeletePostComponent } from './posts/delete-post/delete-post.component';
     FormsModule,
     MatOptionModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule
     
 
   ],

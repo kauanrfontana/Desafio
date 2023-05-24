@@ -1,6 +1,5 @@
 export interface Post {
-    "name": string,
-    "email": string,
-    "gender": string,
-    "status": string
+    "user_id": number,
+    "title": string,
+    "body": string
 }

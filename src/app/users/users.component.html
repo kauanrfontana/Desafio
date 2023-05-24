@@ -11,8 +11,15 @@
 
         </div>
 
-        <app-create-user *ngIf="modalCreate" (exitCreate)="showModalCreate()" (eventMsgCreate)="reload()"></app-create-user>
-     
+        <app-create-user *ngIf="modalCreate" (eventMsgCreate)="createMsg($event); reload()" (exitCreate)="showModalCreate()" ></app-create-user>
+        <div class="msg-created" *ngIf="msgcreate">
+
+          <h3 class="text-success-create" *ngIf="createError == ''">Usuário cadastrado com sucesso!</h3>
+
+          <h3 class="text-error-create" *ngIf="createError != ''">Usuário NÃO cadastrado[ {{createError}} ]</h3>
+
+        </div>
+
         <div class="controllers-top">
 
             <span *ngIf="filterVisible" class="filter">

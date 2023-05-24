@@ -19,17 +19,16 @@ export class CreatePostComponent {
 
 
   data: Post ={
-    "name": "",
-    "email": "",
-    "gender": "",
-    "status": ""
+    "user_id": null,
+    "title": '',
+    "body": ''
   };
   
 
   constructor(private postsService: PostsService){}
 
   newPost(){
-    this.data.status = 'active';
+    
     this.postsService.createPost(this.data).subscribe(
       () => {
         console.log('Post cadastrado com sucesso');

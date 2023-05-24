@@ -24,6 +24,17 @@
     cursor: pointer;
 }
 
+.overlay {
+    background: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
 @keyframes show {
     0% {transform: translate(-25%, -300%)}
     100% {transform: translate(-25%, -50%)}
@@ -35,18 +46,6 @@
     font-weight: bold;
     text-decoration: underline #3f51b5 0.2rem;
     margin-bottom: 1.5rem;
-}
-
-
-.overlay {
-    background: #000;
-    height: 100%;
-    left: 0;
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
 }
 
 .button-delete{

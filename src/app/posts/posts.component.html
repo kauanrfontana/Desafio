@@ -17,12 +17,12 @@
 
         <span *ngIf="filterVisible" class="filter">
           <mat-form-field class="filter-input">
-            <mat-label>Nome</mat-label>
-            <input matInput type="text" class="mat-input-element" #myInput (input)="userName = myInput.value">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput type="text" class="mat-input-element" #myInput (input)="userNameToFilter = myInput.value">
           </mat-form-field>
           <div class="filter-button">
-            <a mat-mini-fab class="filter-icon action-button" color="accent" [disabled]="!userName" (click)="filter(userName)"><mat-icon>search</mat-icon></a>
-            <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()" [disabled]="!userName && !filtered"><mat-icon>clear</mat-icon></a>
+            <a mat-mini-fab class="filter-icon action-button" color="accent" [disabled]="!userNameToFilter" (click)="filter(userNameToFilter)"><mat-icon>search</mat-icon></a>
+            <a mat-mini-fab class="remove-filter-icon action-button" color="warn" (click)="clearFilter(); showFilter()" [disabled]="!userNameToFilter && !filtered"><mat-icon>clear</mat-icon></a>
           </div>
         </span>
 
@@ -50,15 +50,17 @@
                   <ng-container matColumnDef="user_id">
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Id do Usuário </th>
                     <td mat-cell *matCellDef="let element" class="table-row">
+
                       <mat-icon class="show-name" (click)="userPost(element.user_id)">
                         
-                        <span *ngIf="visible == false; else nameVisible">visibility</span>
+                        <span *ngIf="visible == false; else  nameVisible">visibility</span>
                         <ng-template #nameVisible>visibility_off</ng-template>
 
                       </mat-icon>
+
                       <span *ngIf="!this.userName">{{element.user_id}}</span>
                       <span *ngIf="element.user_id == this.userId">{{this.userName}}</span>
-                    </td>
+            
                   </ng-container>
 
                   <ng-container matColumnDef="title">

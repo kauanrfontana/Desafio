@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { UsersService } from '../services/users.service';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, Observable  } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 
 
@@ -12,6 +14,8 @@ import { firstValueFrom, Observable } from 'rxjs';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
+ 
+  // variáveis com influência na tabela
   dados: any = [];
   per_page = '10';
   pages = 1;
@@ -19,23 +23,25 @@ export class PostsComponent implements OnInit {
   inLastPage = false;
   maxPage: number = 166;
   loading: boolean = false;
-
   userName:string;
+  visible = false;
+  displayedColumns: string[] = ['id', 'user_id', 'title', 'body'];
+
+  // variáveis com influência no filtro
+  userNameToFilter:string;
   userId: number;
   filterVisible = false;
   filtered = false;
 
+  // variáveis com influência no modal de delete
   modalDelete = false;
   msgdel = false;
   deleteError = "";
   hideModal = false;
 
+  // variáveis com influência no modal de create
   modalCreate = false;
-
-  visible = false;
-
-  displayedColumns: string[] = ['id', 'user_id', 'title', 'body'];
-
+  
   constructor(private postsService: PostsService, private usersService: UsersService){}
 
   async ngOnInit(){
@@ -45,7 +51,6 @@ export class PostsComponent implements OnInit {
         .catch(()=>{
           alert('error');
       })
-
 
   }
 
@@ -97,21 +102,31 @@ await setTimeout(() => {
 }, 100);
 }
 
-async filter(userName:string){
+async filter(userNameToFilter:string){
 this.dados = null
 this.loading = true;
 
-setTimeout(() => {
-  firstValueFrom(this.dados = this.postsService.getFiltered(userName))
-    .then((data) => {
-      console.log(data.length)
-      this.loading = !this.loading;
-      this.filtered = true;
-    })
-    .catch(()=>{
-      alert('error')
-  });
-}, 1000);
+let user_id
+let user
+try {
+  user = await this.usersService.getFiltered(userNameToFilter).toPromise();
+  user_id = user[0].id
+  console.log(user_id)
+} catch (error) {
+  alert('Usuário não existe, ou não possui posts cadastrados')
+}
+
+
+
+firstValueFrom(this.dados = await this.postsService.getFiltered(user_id))
+  .then(() => {
+    this.loading = !this.loading;
+    this.filtered = true;
+  })
+  .catch(()=>{
+    alert('error')
+});
+
 }
 
 async clearFilter(){
