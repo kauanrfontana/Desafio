@@ -21,11 +21,18 @@
     height: 1.6rem;
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
-.exit-button:hover{
-  cursor: pointer;
-  color: #3f51b5;
+.overlay {
+    background: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 }
 
 @keyframes show {
@@ -39,18 +46,6 @@
     font-weight: bold;
     text-decoration: underline #3f51b5 0.2rem;
     margin-bottom: 1.5rem;
-}
-
-
-.overlay {
-    background: #000;
-    height: 100%;
-    left: 0;
-    opacity: 0.5;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
 }
 
 .button-delete{

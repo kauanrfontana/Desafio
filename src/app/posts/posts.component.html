@@ -2,16 +2,16 @@
   <mat-card-content class="card-content">
       <span class="title">Postagens</span>
 
-      <app-delete-user *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-user>
+      <app-delete-post *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-post>
       <div class="msg-deleted" *ngIf="msgdel">
 
-          <h3 class="text-success-delete" *ngIf="deleteError == ''">Usuário excluído com sucesso!</h3>
+          <h3 class="text-success-delete" *ngIf="deleteError == ''">Post excluído com sucesso!</h3>
 
-          <h3 class="text-error-delete" *ngIf="deleteError != ''">Usuário NÃO excluído [ {{deleteError}} ]</h3>
+          <h3 class="text-error-delete" *ngIf="deleteError != ''">Post NÃO excluído [ {{deleteError}} ]</h3>
 
       </div>
 
-      <app-create-user *ngIf="modalCreate" (exitCreate)="showModalCreate()" (eventMsgCreate)="reload()"></app-create-user>
+      <app-create-post *ngIf="modalCreate" (exitCreate)="showModalCreate()" (eventMsgCreate)="reload()"></app-create-post>
 
       <div class="controllers-top">
 
