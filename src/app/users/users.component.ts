@@ -13,13 +13,14 @@ import { FormControl } from '@angular/forms';
 export class UsersComponent implements OnInit{
 
   // variáveis com influência na tabela
+  beforeDados: any;
   dados: any = [];
   displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
   per_page = '10';
   pages = 1;
   inFirstPage = true;
   inLastPage = false;
-  maxPage: number = 166;
+  maxPage: number = 100;
   loading: boolean = false;
   userName = '';
 
@@ -43,10 +44,13 @@ export class UsersComponent implements OnInit{
 
   async ngOnInit(){
     this.loading = true;
-    await firstValueFrom(this.dados = this.usersService.getUsers(this.pages, this.per_page))
-        .then(() => {this.loading = !this.loading})
+    await firstValueFrom(this.beforeDados = this.usersService.getUsers())
+        .then(() => {
+          this.loading = !this.loading;
+          this.dados = this.beforeDados;
+        })
         .catch(()=>{
-          alert('error')
+          alert('error');
       })
 
   }
@@ -55,8 +59,11 @@ export class UsersComponent implements OnInit{
         this.dados = null;
         this.loading = true;
         await setTimeout(() => {
-           firstValueFrom(this.dados = this.usersService.getUsers(this.pages, this.per_page))
-            .then(() => {this.loading = !this.loading});
+           firstValueFrom(this.beforeDados = this.usersService.getUsers(this.pages, this.per_page))
+            .then(() => {
+              this.loading = !this.loading;
+              this.dados = this.beforeDados;
+            });
         }, 1000);
         
   }
@@ -75,8 +82,11 @@ export class UsersComponent implements OnInit{
     this.inLastPage = this.pages === this.maxPage;
 
     await setTimeout(() => {
-      firstValueFrom(this.dados = this.usersService.getPagination(this.pages, this.per_page))
-        .then(() => {this.loading = !this.loading})
+      firstValueFrom(this.beforeDados = this.usersService.getPagination(this.pages, this.per_page))
+        .then(() => {
+          this.loading = !this.loading;
+          this.dados = this.beforeDados;
+        })
         .catch(()=>{
           alert('error')
       });
@@ -88,10 +98,11 @@ export class UsersComponent implements OnInit{
     this.loading = true;
 
     setTimeout(() => {
-      firstValueFrom(this.dados = this.usersService.getFiltered(userName, this.pages, this.per_page))
+      firstValueFrom(this.beforeDados = this.usersService.getFiltered(userName, this.pages, this.per_page))
         .then((data) => {
           console.log(data.length)
           this.loading = !this.loading; 
+          this.dados = this.beforeDados;
           this.filtered = true;
         })
         .catch(()=>{
@@ -106,8 +117,11 @@ export class UsersComponent implements OnInit{
     this.loading = true;
 
     await setTimeout(() => {
-      firstValueFrom(this.dados = this.usersService.getUsers(this.pages, this.per_page))
-        .then(() => {this.loading = !this.loading})
+      firstValueFrom(this.beforeDados = this.usersService.getUsers(this.pages, this.per_page))
+        .then(() => {
+          this.loading = !this.loading;
+          this.dados = this.beforeDados;
+        })
         .catch(()=>{
           alert('error')
       });

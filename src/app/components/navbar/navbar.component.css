@@ -25,6 +25,10 @@
     width: 10rem;
 }
 
+.clicked{
+    background-color: rgb(184, 185, 186) !important;
+}
+
 .nav-items:hover{
     scale: 1.02;
 }
