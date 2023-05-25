@@ -64,6 +64,11 @@
   background-color: rgb(33, 138, 33);
 }
 
+.edit-icon{
+  background-color: rgb(255, 166, 0);
+  scale: .9;
+}
+
 .remove-filter-icon{
   margin-left: 0.2rem;
 }
@@ -127,7 +132,7 @@
 .scrollable{
   display: flex;
   overflow: auto;
-  max-height: 200px;
+  max-height: 150px;
   margin: 10px;
 }
 

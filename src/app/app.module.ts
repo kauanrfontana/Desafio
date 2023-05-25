@@ -36,6 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { UpdateUserComponent } from './users/update-user/update-user.component';
+import { UpdatePostComponent } from './posts/update-post/update-post.component';
 
 
 
@@ -55,6 +57,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     VisibleIfDirective,
     CreatePostComponent,
     DeletePostComponent,
+    UpdateUserComponent,
+    UpdatePostComponent,
     
   ],
   imports: [

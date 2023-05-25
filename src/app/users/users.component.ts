@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit{
   // variáveis com influência na tabela
   beforeDados: any;
   dados: any = [];
-  displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status', 'update'];
   per_page = '10';
   pages = 1;
   inFirstPage = true;
@@ -38,6 +38,11 @@ export class UsersComponent implements OnInit{
   modalCreate = false;
   msgcreate = false;
   createError = "";
+
+  // variáveis com influência no moda de Update
+  modalUpdate = false;
+  msgupdate = false;
+  updateError = "";
   
 
   constructor(private usersService: UsersService){}
@@ -140,6 +145,10 @@ export class UsersComponent implements OnInit{
     this.modalCreate = this.modalCreate == false;
   }
 
+  showModalUpdate(){
+    this.modalUpdate = this.modalUpdate == false;
+  }
+
   deleteMsg(result: string){
     if(result === 'success'){
       this.msgdel = !this.msgdel;
@@ -163,6 +172,19 @@ export class UsersComponent implements OnInit{
 
     setTimeout(() => {
       this.msgcreate = false
+    }, 5000);
+  }
+
+  updateMsg(result: string){
+    if(result === 'success'){
+      this.msgupdate = !this.msgupdate;
+    } else{
+      this.msgupdate = !this.msgupdate;
+      this.updateError = result;
+    }
+
+    setTimeout(() => {
+      this.msgupdate = false
     }, 5000);
   }
   

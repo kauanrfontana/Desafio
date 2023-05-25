@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
   loading: boolean = false;
   userName:string;
   visible = false;
-  displayedColumns: string[] = ['id', 'user_id', 'title', 'body'];
+  displayedColumns: string[] = ['id', 'user_id', 'title', 'body', 'update'];
 
   // variáveis com influência no filtro
   userNameToFilter:string;
