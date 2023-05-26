@@ -21,9 +21,65 @@ export class UpdatePostComponent implements OnInit{
     "body": ''
   };
 
+  postId: any
 
-  ngOnInit(): void {
+  constructor(private postsService: PostsService, private router: Router, private route: ActivatedRoute ){}
 
+
+  async ngOnInit(){
+    try {
+      this.route.params.subscribe(params => {
+        this.postId = params['id'];
+        console.log(this.postId, params['id'])
+      });
+      if(this.postId){
+        this.postsService.filterPost(this.postId).subscribe(
+          (data) => {
+            this.postData.title = data.title;
+            this.postData.body = data.body;
+            this.postData.user_id = data.user_id;
+          }
+        )
+      }else{
+        throw new Error("Edit ID não está definido");
+      }
+
+    } catch (error) {
+      this.exit()
+      alert(error)
+    }
+  }
+
+  UpdatePost(){
+
+    this.postsService.updatePost(this.postId, this.postData).subscribe(
+      () => {
+        console.log('Post editado com sucesso');
+        this.exit()
+      },
+      (error) => {
+        console.error('Erro ao editar post', error);
+        let erro: string;
+        if(error.ok === false){
+          erro = "edição inválida!"
+        }
+        alert(erro)
+        this.exit()
+
+      }
+    );
+  }
+
+  getErrorMessage(campo) {
+    if (campo.hasError('required')) {
+      return 'Campo obrigatório!';
+    }
+
+    return '';
+  }
+
+  exit(){
+    this.router.navigate(['/posts'])
   }
 
 }

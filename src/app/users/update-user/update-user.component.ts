@@ -43,9 +43,11 @@ export class UpdateUserComponent implements OnInit{
         )
       }else{
         throw new Error("Edit ID não está definido");
+
       }
 
     } catch (error) {
+      this.exit()
       alert(error)
     }
 

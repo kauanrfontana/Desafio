@@ -84,4 +84,28 @@ export class PostsService {
 
     return this.httpClient.post<any>(`https://gorest.co.in/public/v2/posts/`, data, requestOptions);
   }
+
+  filterPost(id:number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    const requestOptions = { headers: headers };
+
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts/${id}`, requestOptions);
+  }
+
+  updatePost(id, data): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.key}`,
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+
+    const requestOptions = { headers: headers };
+
+    return this.httpClient.put<any>(`https://gorest.co.in/public/v2/posts/${id}`, data, requestOptions);
+  }
 }

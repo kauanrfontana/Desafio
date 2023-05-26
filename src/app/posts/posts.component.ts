@@ -197,7 +197,7 @@ createMsg(result: string){
 
 sendId(postId) {
   const id = postId;
-  this.router.navigate(['/', id]);
+  this.router.navigate(['/posts/update', id]);
 }
 
 

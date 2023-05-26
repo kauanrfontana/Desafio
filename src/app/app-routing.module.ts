@@ -21,7 +21,7 @@ const routes: Routes = [
     component: PostsComponent,
   },
   {
-    path: "posts/update/:valor",
+    path: "posts/update/:id",
     component: UpdatePostComponent,
   },
 ];
