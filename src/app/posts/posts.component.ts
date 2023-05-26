@@ -4,6 +4,7 @@ import { UsersService } from '../services/users.service';
 import { firstValueFrom, Observable  } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -14,7 +15,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
- 
+
   // variáveis com influência na tabela
   beforeDados: any
   dados: any = [];
@@ -44,8 +45,8 @@ export class PostsComponent implements OnInit {
   modalCreate = false;
   msgcreate = false;
   createError = "";
-  
-  constructor(private postsService: PostsService, private usersService: UsersService){}
+
+  constructor(private postsService: PostsService, private usersService: UsersService, private router: Router ){}
 
   async ngOnInit(){
     this.loading = true;
@@ -71,7 +72,7 @@ export class PostsComponent implements OnInit {
       this.userName = null;
       this.visible = false;
     }
-   
+
 
 
   }
@@ -192,6 +193,11 @@ createMsg(result: string){
   setTimeout(() => {
     this.msgcreate = false
   }, 5000);
+}
+
+sendId(postId) {
+  const id = postId;
+  this.router.navigate(['/', id]);
 }
 
 

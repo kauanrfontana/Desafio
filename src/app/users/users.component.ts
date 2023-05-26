@@ -1,8 +1,9 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { firstValueFrom, Observable  } from 'rxjs';
 import { startWith, map, switchMap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class UsersComponent implements OnInit{
   modalDelete = false;
   msgdel = false;
   deleteError = "";
-  
+
 
   // variáveis com influência no modal de create
   modalCreate = false;
@@ -43,9 +44,9 @@ export class UsersComponent implements OnInit{
   modalUpdate = false;
   msgupdate = false;
   updateError = "";
-  
 
-  constructor(private usersService: UsersService){}
+
+  constructor(private usersService: UsersService, private router: Router){}
 
   async ngOnInit(){
     this.loading = true;
@@ -70,7 +71,7 @@ export class UsersComponent implements OnInit{
               this.dados = this.beforeDados;
             });
         }, 1000);
-        
+
   }
 
   async paginate(add = null){
@@ -106,7 +107,7 @@ export class UsersComponent implements OnInit{
       firstValueFrom(this.beforeDados = this.usersService.getFiltered(userName, this.pages, this.per_page))
         .then((data) => {
           console.log(data.length)
-          this.loading = !this.loading; 
+          this.loading = !this.loading;
           this.dados = this.beforeDados;
           this.filtered = true;
         })
@@ -145,10 +146,6 @@ export class UsersComponent implements OnInit{
     this.modalCreate = this.modalCreate == false;
   }
 
-  showModalUpdate(){
-    this.modalUpdate = this.modalUpdate == false;
-  }
-
   deleteMsg(result: string){
     if(result === 'success'){
       this.msgdel = !this.msgdel;
@@ -175,17 +172,9 @@ export class UsersComponent implements OnInit{
     }, 5000);
   }
 
-  updateMsg(result: string){
-    if(result === 'success'){
-      this.msgupdate = !this.msgupdate;
-    } else{
-      this.msgupdate = !this.msgupdate;
-      this.updateError = result;
-    }
-
-    setTimeout(() => {
-      this.msgupdate = false
-    }, 5000);
+  sendId(userId) {
+    const id = userId;
+    this.router.navigate(['/update', id]);
   }
-  
+
 }

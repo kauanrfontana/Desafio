@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { FormGroup, FormControl, Validators, FormGroupDirective } from '@angular/forms'
 import { User } from 'src/app/interfaces/user';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-user',
@@ -9,12 +10,11 @@ import { User } from 'src/app/interfaces/user';
   styleUrls: ['./update-user.component.css']
 })
 export class UpdateUserComponent implements OnInit{
-  @Output() exitUpdate = new EventEmitter();
-  @Output() eventMsgUpdate = new EventEmitter();
 
   emailControl = new FormControl('', [Validators.required, Validators.email]);
   nameControl = new FormControl('', [Validators.required]);
   genderControl = new FormControl('', [Validators.required]);
+  statusControl = new FormControl('', [Validators.required]);
 
   data: User ={
     "name": "",
@@ -23,27 +23,38 @@ export class UpdateUserComponent implements OnInit{
     "status": ""
   };
 
-  userId: string
+  userId: any
 
-  constructor(private usersService: UsersService){}
+  constructor(private usersService: UsersService, private route: ActivatedRoute, private router: Router ){}
 
   async ngOnInit(){
-    this.usersService.getUserName(this.userId).subscribe(
-      (data) => {
-        this.data.name = data.name;
-        this.data.email = data.email;
-        this.data.gender = data.gender;
-        this.data.status = data.status;
+    try {
+      this.route.params.subscribe(params => {
+        this.userId = params['id'];
+      });
+      if(this.userId){
+        this.usersService.getUserName(this.userId).subscribe(
+          (data) => {
+            this.data.name = data.name;
+            this.data.email = data.email;
+            this.data.gender = data.gender;
+            this.data.status = data.status;
+          }
+        )
+      }else{
+        throw new Error("Edit ID não está definido");
       }
-    )
+
+    } catch (error) {
+      alert(error)
+    }
+
   }
-  newUser(){
-    this.data.status = 'active';
-    this.usersService.createUser(this.data).subscribe(
+  updateUser(){
+    this.usersService.updateUser(this.userId, this.data).subscribe(
       () => {
         console.log('Usuário editado com sucesso');
-        this.eventMsgUpdate.emit("success");
-        this.exitUpdate.emit();
+        this.exit();
         // Lógica adicional após a exclusão do usuário
       },
       (error) => {
@@ -52,11 +63,15 @@ export class UpdateUserComponent implements OnInit{
         if(error.ok === false){
           erro = "erro ao cadastrar usuário!"
         }
-        this.eventMsgUpdate.emit(erro);
-        this.exitUpdate.emit();
-  
+        alert(erro)
+        this.exit();
+
       }
     );
+  }
+
+  exit(){
+    this.router.navigate(['/']);
   }
 
   getErrorMessage(campo) {

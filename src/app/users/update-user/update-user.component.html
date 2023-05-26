@@ -1,5 +1,6 @@
+<app-users></app-users>
 <div class="modal-create">
-    <a class="exit-button" (click)="this.exitUpdate.emit()"><mat-icon>clear</mat-icon></a>
+    <a class="exit-button" (click)="exit()"><mat-icon>clear</mat-icon></a>
     <h1 class="title">Edição de Usuário</h1>
 
     <div class="content">
@@ -17,13 +18,22 @@
 
         <mat-form-field class="">
             <mat-label>Gênero:</mat-label>
-            <mat-select>
+            <mat-select [(ngModel)]="data.gender">
             <mat-option value="male" (click)="data.gender = 'male'">Masculino</mat-option>
             <mat-option value="female" (click)="data.gender = 'female'">Femenino</mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-raised-button class="submit-button" (click)="newUser()" [disabled]="emailControl.invalid || nameControl.invalid || data.gender == ''">Cadastrar</button>
+
+        <mat-form-field class="">
+            <mat-label>Status:</mat-label>
+            <mat-select [(ngModel)]="data.status">
+            <mat-option value="active" (click)="data.status = 'active'">Ativo</mat-option>
+            <mat-option value="inactive" (click)="data.status = 'inactive'">Inativo</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button class="submit-button" (click)="updateUser()" [disabled]="emailControl.invalid || nameControl.invalid || data.gender == '' || data.status == ''">Cadastrar</button>
     </div>
-    
+
 </div>
-<div class="overlay" (click)="this.exitUpdate.emit()"></div>
+<div class="overlay" (click)="exit()"></div>
