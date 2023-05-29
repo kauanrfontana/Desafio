@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit{
     this.loading = true;
     await firstValueFrom(this.beforeDados = this.usersService.getUsers())
         .then(() => {
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
         })
         .catch(()=>{
@@ -67,7 +67,7 @@ export class UsersComponent implements OnInit{
         await setTimeout(() => {
            firstValueFrom(this.beforeDados = this.usersService.getUsers(this.pages, this.per_page))
             .then(() => {
-              this.loading = !this.loading;
+              this.loading = false;
               this.dados = this.beforeDados;
             });
         }, 1000);
@@ -90,7 +90,7 @@ export class UsersComponent implements OnInit{
     await setTimeout(() => {
       firstValueFrom(this.beforeDados = this.usersService.getPagination(this.pages, this.per_page))
         .then(() => {
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
         })
         .catch(()=>{
@@ -104,10 +104,10 @@ export class UsersComponent implements OnInit{
     this.loading = true;
 
     setTimeout(() => {
-      firstValueFrom(this.beforeDados = this.usersService.getFiltered(userName, this.pages, this.per_page))
+      firstValueFrom(this.beforeDados = this.usersService.getFiltered(userName))
         .then((data) => {
           console.log(data.length)
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
           this.filtered = true;
         })
@@ -125,7 +125,7 @@ export class UsersComponent implements OnInit{
     await setTimeout(() => {
       firstValueFrom(this.beforeDados = this.usersService.getUsers(this.pages, this.per_page))
         .then(() => {
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
         })
         .catch(()=>{
