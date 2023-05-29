@@ -19,11 +19,11 @@
             <mat-label>Gênero:</mat-label>
             <mat-select>
             <mat-option value="male" (click)="data.gender = 'male'">Masculino</mat-option>
-            <mat-option value="female" (click)="data.gender = 'female'">Femenino</mat-option>
+            <mat-option value="female" (click)="data.gender = 'female'">Feminino</mat-option>
             </mat-select>
         </mat-form-field>
         <button mat-raised-button class="submit-button" (click)="newUser()" [disabled]="emailControl.invalid || nameControl.invalid || data.gender == ''">Cadastrar</button>
     </div>
-    
+
 </div>
 <div class="overlay" (click)="this.exitCreate.emit()"></div>
