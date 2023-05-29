@@ -15,7 +15,7 @@
           <textarea matInput type="text" [(ngModel)]="postData.body" class="mat-textarea-element" [formControl]="bodyControl"></textarea>
           <mat-error *ngIf="bodyControl.invalid">{{getErrorMessage(bodyControl)}}</mat-error>
       </mat-form-field>
-      <button mat-raised-button class="submit-button" (click)="UpdatePost()" [disabled]="bodyControl.invalid || bodyControl.invalid">Cadastrar</button>
+      <button mat-raised-button class="submit-button" (click)="UpdatePost()" [disabled]="bodyControl.invalid || bodyControl.invalid">Alterar</button>
   </div>
 
 </div>
