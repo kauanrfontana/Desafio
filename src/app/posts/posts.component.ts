@@ -52,7 +52,7 @@ export class PostsComponent implements OnInit {
     this.loading = true;
     await firstValueFrom(this.beforeDados = this.postsService.getPosts())
         .then(() => {
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
         })
         .catch(()=>{
@@ -83,7 +83,7 @@ export class PostsComponent implements OnInit {
     await setTimeout(() => {
        firstValueFrom(this.beforeDados = this.postsService.getPosts())
         .then(() => {
-          this.loading = !this.loading;
+          this.loading = false;
           this.dados = this.beforeDados;
         });
     }, 1000);
@@ -106,7 +106,7 @@ this.inLastPage = this.pages === this.maxPage;
 await setTimeout(() => {
   firstValueFrom(this.beforeDados = this.postsService.getPagination(this.pages, this.per_page))
     .then(() => {
-      this.loading = !this.loading;
+      this.loading = false;
       this.dados = this.beforeDados;
     })
     .catch(()=>{
@@ -129,11 +129,9 @@ try {
   alert('Usuário não existe, ou não possui posts cadastrados');
 }
 
-
-
 firstValueFrom(this.beforeDados = await this.postsService.getFiltered(user_id))
   .then(() => {
-    this.loading = !this.loading;
+    this.loading = false;
     this.dados = this.beforeDados;
     this.filtered = true;
   })
@@ -151,7 +149,7 @@ this.loading = true;
 await setTimeout(() => {
   firstValueFrom(this.beforeDados = this.postsService.getPosts())
    .then(() => {
-     this.loading = !this.loading;
+     this.loading = false;
      this.dados = this.beforeDados;
    });
 }, 100);
