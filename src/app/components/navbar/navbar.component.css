@@ -25,7 +25,7 @@
     width: 10rem;
 }
 
-.clicked{
+.clicked{/* adicionar ao estar na página */
     background-color: rgb(184, 185, 186) !important;
 }
 
@@ -40,9 +40,6 @@
     justify-content: center;
 }
 
-.mat-badge-medium.mat-badge-above .mat-badge-content {
-    right: -20px;
-}
 
 
 

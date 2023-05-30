@@ -25,8 +25,8 @@ export class CreateUserComponent {
     "status": ""
   };
 
-  
-  
+
+
 
   constructor(private usersService: UsersService){}
 
@@ -37,17 +37,18 @@ export class CreateUserComponent {
         console.log('Usuário cadastrado com sucesso');
         this.eventMsgCreate.emit("success");
         this.exitCreate.emit();
-        // Lógica adicional após a exclusão do usuário
       },
       (error) => {
-        console.error('Erro ao cadastrar usuário', error);
         let erro: string;
-        if(error.ok === false){
-          erro = "erro ao cadastrar usuário!"
+        if(error.ok === false && error.status == '422'){
+          erro = "Email já foi cadastrado!"
+        }else{
+          erro = "Erro ao cadastrar usuário!"
         }
+        //console.log(JSON.stringify(error))
         this.eventMsgCreate.emit(erro);
         this.exitCreate.emit();
-  
+
       }
     );
   }
