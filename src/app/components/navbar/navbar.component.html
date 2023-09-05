@@ -1,8 +1,8 @@
-<mat-sidenav-container class="container">
-	<mat-sidenav mode="side" opened class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
-		<mat-nav-list class="nav-list">
+<mat-drawer-container class="container">
+	<mat-drawer mode="side" opened class="sidenav" mode="side" opened>
+		<mat-list class="nav-list">
 			<div mat-list-item routerLink="/" >
-				<a mat-raised-button class="nav-items">
+				<a mat-raised-button class="nav-items" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
 					<mat-icon class="nav-icon">
 						face
 					</mat-icon>
@@ -10,16 +10,16 @@
 				</a>
 			</div>
 			<div mat-list-item  matBadgeColor="accent" routerLink="/posts" >
-				<a mat-raised-button class="nav-items" >
+				<a mat-raised-button class="nav-items" routerLinkActive="active">
 					<mat-icon class="nav-icon">
 						chat
 					</mat-icon>
 					Postagens
 				</a>
 			</div>
-		</mat-nav-list>
-	</mat-sidenav>
-	<mat-sidenav-content class="content">
+		</mat-list>
+	</mat-drawer>
+	<mat-drawer-content class="content">
   		<router-outlet></router-outlet>   
-	</mat-sidenav-content>
-</mat-sidenav-container>
+	</mat-drawer-content>
+</mat-drawer-container>

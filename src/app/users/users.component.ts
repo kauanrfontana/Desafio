@@ -143,7 +143,7 @@ export class UsersComponent implements OnInit{
   }
 
   showModalCreate(){
-    this.modalCreate = this.modalCreate == false;
+    this.router.navigate(['register']);
   }
 
   deleteMsg(result: string){

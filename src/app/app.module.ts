@@ -14,13 +14,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { HeaderComponent } from './components/header/header.component';
 import { MatIconModule } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
-import { MatBadgeModule } from '@angular/material/badge'
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 //http request import
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,7 +34,6 @@ import { VisibleIfDirective } from './directives/visible-if.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UpdateUserComponent } from './users/update-user/update-user.component';
 import { UpdatePostComponent } from './posts/update-post/update-post.component';
 
@@ -70,8 +68,6 @@ import { UpdatePostComponent } from './posts/update-post/update-post.component';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatBadgeModule,
-    MatProgressBarModule,
     MatCardModule,
     MatListModule,
     MatExpansionModule,
@@ -84,7 +80,7 @@ import { UpdatePostComponent } from './posts/update-post/update-post.component';
     MatOptionModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatDialogModule
     
 
   ],
