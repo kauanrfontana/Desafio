@@ -89,6 +89,7 @@ input[type=number] {
 .mat-textarea-element{
   height: 8rem;
   word-wrap: break-word;
+  resize: none;
 }
 
 .margin-input-disabled{

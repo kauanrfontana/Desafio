@@ -1,23 +1,23 @@
 <mat-drawer-container class="container">
-	<mat-drawer mode="side" opened class="sidenav" mode="side" opened>
+	<mat-drawer mode="side" class="sidenav" mode="side" opened>
 		<mat-list class="nav-list">
-			<div mat-list-item routerLink="/" >
-				<a mat-raised-button class="nav-items" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+			<div mat-list-item routerLink="/" class="nav-items" >
+				<a mat-raised-button routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
 					<mat-icon class="nav-icon">
 						face
 					</mat-icon>
-					Usuários
+					<span *ngIf="!isMobile">Usuários</span>
 				</a>
 			</div>
-			<div mat-list-item  matBadgeColor="accent" routerLink="/posts" >
-				<a mat-raised-button class="nav-items" routerLinkActive="active">
+			<div mat-list-item routerLink="/posts" class="nav-items" >
+				<a mat-raised-button routerLinkActive="active">
 					<mat-icon class="nav-icon">
 						chat
 					</mat-icon>
-					Postagens
+					<span *ngIf="!isMobile">Postagens</span>
 				</a>
 			</div>
-			<div>
+			<div *ngIf="!isMobile">
 				<img src="../../../assets/paytech-removebg-preview.png">
 			</div>
 		</mat-list>

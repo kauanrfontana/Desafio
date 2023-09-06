@@ -30,7 +30,6 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { DeleteUserComponent } from './users/delete-user/delete-user.component';
-import { VisibleIfDirective } from './directives/visible-if.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreatePostComponent } from './posts/create-post/create-post.component';
 import { DeletePostComponent } from './posts/delete-post/delete-post.component';
@@ -52,7 +51,6 @@ import { UpdatePostComponent } from './posts/update-post/update-post.component';
     HeaderComponent,
     CreateUserComponent,
     DeleteUserComponent,
-    VisibleIfDirective,
     CreatePostComponent,
     DeletePostComponent,
     UpdateUserComponent,
