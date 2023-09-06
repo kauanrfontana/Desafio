@@ -1,9 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { firstValueFrom, Observable  } from 'rxjs';
-import { startWith, map, switchMap } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { firstValueFrom  } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -16,7 +15,7 @@ export class UsersComponent implements OnInit{
   // variáveis com influência na tabela
   beforeDados: any;
   dados: any = [];
-  displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status', 'update'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'gender', 'status', 'actions'];
   per_page = '10';
   pages = 1;
   inFirstPage = true;
@@ -45,8 +44,12 @@ export class UsersComponent implements OnInit{
   msgupdate = false;
   updateError = "";
 
+  userDelId = "";
 
-  constructor(private usersService: UsersService, private router: Router){}
+  @ViewChild('testeSnack') testSnack: ElementRef
+
+
+  constructor(private usersService: UsersService, private router: Router,  private _snackBar: MatSnackBar){}
 
   async ngOnInit(){
     this.loading = true;
@@ -138,20 +141,27 @@ export class UsersComponent implements OnInit{
     this.filterVisible = this.filterVisible == false;
   }
 
-  showModalDelete(){
+  showModalDelete(id: string){
+    this.userDelId = id; 
     this.modalDelete = this.modalDelete == false;
   }
 
   showModalCreate(){
-    this.router.navigate(['register']);
+    this.modalCreate = this.modalCreate == false;
   }
 
   deleteMsg(result: string){
     if(result === 'success'){
-      this.msgdel = !this.msgdel;
+      this._snackBar.open("Usuário excluído com sucesso!", "", {
+        duration: 2000,
+      });
+      /* this.msgdel = !this.msgdel; */
     } else{
-      this.msgdel = !this.msgdel;
-      this.deleteError = result;
+      this._snackBar.open("Erro ao excluir usuário!", "", {
+        duration: 2000,
+      });
+      /* this.msgdel = !this.msgdel;
+      this.deleteError = result; */
     }
 
     setTimeout(() => {
@@ -161,15 +171,14 @@ export class UsersComponent implements OnInit{
 
   createMsg(result: string){
     if(result === 'success'){
-      this.msgcreate = !this.msgcreate;
+      this._snackBar.open("Usuário cadastrado com sucesso!", "", {
+        duration: 2000,
+      });
     } else{
-      this.msgcreate = !this.msgcreate;
-      this.createError = result;
+      this._snackBar.open("Erro ao cadastrar usuário!", "", {
+        duration: 2000,
+      });
     }
-
-    setTimeout(() => {
-      this.msgcreate = false
-    }, 5000);
   }
 
   sendId(userId) {
@@ -177,4 +186,16 @@ export class UsersComponent implements OnInit{
     this.router.navigate(['/update', id]);
   }
 
+  snackSuccess() {
+    this._snackBar.open("");
+  }
+
+  snackError() {
+
+  }
+
 }
+function viewChild() {
+  throw new Error('Function not implemented.');
+}
+

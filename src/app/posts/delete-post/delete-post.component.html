@@ -1,14 +1,6 @@
 <div class="modal-delete">
     <a class="exit-button" (click)="this.exitDelete.emit()"><mat-icon>clear</mat-icon></a>
-    <h2 class="title">Excluir post:</h2>
-    <div class="controllers-delete">
-    
-        <mat-form-field class="input-delete">
-            <mat-label>id do Post</mat-label>
-            <input matInput type="number" #myInput (input)="delId = myInput.value" class="mat-input-element" required>
-        </mat-form-field>
-        <button type="submit" mat-mini-fab class="button-delete" color="warn" [disabled]="!delId" (click)="deletePost(delId)"><mat-icon>delete_sweep</mat-icon></button>
-        
-    </div>
+    <h2 class="title">Deseja excluir este post?</h2>
+    <button type="submit" mat-raised-button class="button-delete" color="warn" (click)="deletePost()">Excluir</button>
 </div>
 <div class="overlay"  (click)="this.exitDelete.emit()"></div>

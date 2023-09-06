@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -61,7 +61,7 @@ export class PostsService {
     return this.httpClient.get<any>(`https://gorest.co.in/public/v2/posts?page=${page}&per_page=${per_page}`, requestOptions);
   }
 
-  deletePost(id:number): Observable<any> {
+  deletePost(id:string): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.key}`,
       'content-type': 'application/json',

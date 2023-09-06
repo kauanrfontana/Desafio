@@ -19,7 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 //http request import
 import { HttpClientModule } from '@angular/common/http';
 
@@ -80,7 +80,7 @@ import { UpdatePostComponent } from './posts/update-post/update-post.component';
     MatOptionModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatSnackBarModule
     
 
   ],

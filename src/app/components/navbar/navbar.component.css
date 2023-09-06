@@ -5,6 +5,7 @@
 .sidenav {
     width: 200px;
     display: flex;
+    position: fixed;
     margin-top: 64px;
 }
 

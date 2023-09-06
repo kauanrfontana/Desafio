@@ -2,23 +2,10 @@
     <mat-card-content class="card-content">
         <span class="title">Usuários</span>
 
-        <app-delete-user *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-user>
-        <div class="msg-deleted" *ngIf="msgdel">
-
-          <h3 class="text-success-delete" *ngIf="deleteError == ''">Usuário excluído com sucesso!</h3>
-
-          <h3 class="text-error-delete" *ngIf="deleteError != ''">Usuário NÃO excluído [ {{deleteError}} ]</h3>
-
-        </div>
+        <app-delete-user *ngIf="modalDelete" [delUserId]="userDelId" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-user>
 
         <app-create-user *ngIf="modalCreate" (eventMsgCreate)="createMsg($event); reload()" (exitCreate)="showModalCreate()" ></app-create-user>
-        <div class="msg-created" *ngIf="msgcreate">
-
-          <h3 class="text-success-create" *ngIf="createError == ''">Usuário cadastrado com sucesso!</h3>
-
-          <h3 class="text-error-create" *ngIf="createError != ''">Usuário NÃO cadastrado [ {{createError}} ]</h3>
-
-        </div>
+        
 
         <div class="controllers-top">
 
@@ -36,7 +23,6 @@
           <div class="container-actions">
             <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>
 
-            <a mat-mini-fab class="remove-icon action-button" color="warn" (click)="showModalDelete()"><mat-icon>remove</mat-icon></a>
             <a mat-mini-fab class="add-icon action-button" (click)="showModalCreate()"><mat-icon>add</mat-icon></a>
           </div>
 
@@ -75,10 +61,11 @@
                       <td mat-cell *matCellDef="let element" class="table-row"> {{element.status}} </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="update">
-                      <th mat-header-cell *matHeaderCellDef class="table-header"> Editar </th>
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef class="table-header"> Ações </th>
                       <td mat-cell *matCellDef="let element" class="table-row">
-                        <a mat-mini-fab class="edit-icon" (click)="sendId(element.id);"><mat-icon>edit</mat-icon></a>
+                        <a mat-mini-fab class="edit-icon" (click)="sendId(element.id)"><mat-icon>edit</mat-icon></a>
+                        <a mat-mini-fab class="remove-icon" color="warn" (click)="showModalDelete(element.id)"><mat-icon>remove</mat-icon></a>
                       </td>
                     </ng-container>
 

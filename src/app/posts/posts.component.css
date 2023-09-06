@@ -69,16 +69,23 @@
   scale: .9;
 }
 
+.edit-icon:hover{
+  scale: .92;
+}
+
+.remove-icon{
+  scale: .9;
+}
+
+.remove-icon:hover{
+  scale: .92;
+}
+
 .remove-filter-icon{
   margin-left: 0.2rem;
 }
 
-/* .filter-list-icon{
-} */
 
-/* .remove-icon{
-
-} */
 
 .filter-input{
   padding: 0;

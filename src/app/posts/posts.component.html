@@ -2,23 +2,9 @@
   <mat-card-content class="card-content">
       <span class="title">Postagens</span>
 
-      <app-delete-post *ngIf="modalDelete" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-post>
-      <div class="msg-deleted" *ngIf="msgdel">
-
-          <h3 class="text-success-delete" *ngIf="deleteError == ''">Post excluído com sucesso!</h3>
-
-          <h3 class="text-error-delete" *ngIf="deleteError != ''">Post NÃO excluído [ {{deleteError}} ]</h3>
-
-      </div>
+      <app-delete-post *ngIf="modalDelete" [delPostId]="postDelId" (eventMsgDelete)="deleteMsg($event); reload()" (exitDelete)="showModalDelete()"> </app-delete-post>
 
       <app-create-post *ngIf="modalCreate" (eventMsgCreate)="createMsg($event); reload()" (exitCreate)="showModalCreate()" ></app-create-post>
-      <div class="msg-created" *ngIf="msgcreate">
-
-        <h3 class="text-success-create" *ngIf="createError == ''">Post cadastrado com sucesso!</h3>
-
-        <h3 class="text-error-create" *ngIf="createError != ''">Post NÃO cadastrado[ {{createError}} ]</h3>
-
-      </div>
 
       <div class="controllers-top">
 
@@ -35,8 +21,6 @@
 
         <div class="container-actions">
           <a mat-mini-fab class="filter-list-icon action-button" color="accent" (click)="showFilter()"><mat-icon>filter_list</mat-icon></a>
-
-          <a mat-mini-fab class="remove-icon action-button" color="warn" (click)="showModalDelete()"><mat-icon>remove</mat-icon></a>
           <a mat-mini-fab class="add-icon action-button" (click)="showModalCreate()"><mat-icon>add</mat-icon></a>
         </div>
 
@@ -79,10 +63,11 @@
                     <th mat-header-cell *matHeaderCellDef class="table-header"> Descrição </th>
                     <td mat-cell *matCellDef="let element" class="cell-description"> <span class="scrollable">{{element.body}}</span> </td>
                   </ng-container>
-                  <ng-container matColumnDef="update">
-                    <th mat-header-cell *matHeaderCellDef class="table-header"> Editar </th>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="table-header"> Ações </th>
                     <td mat-cell *matCellDef="let element" class="table-row">
-                      <a mat-mini-fab class="edit-icon action-button" (click)="sendId(element.id)"><mat-icon>edit</mat-icon></a>
+                      <a mat-mini-fab class="edit-icon" (click)="sendId(element.id)"><mat-icon>edit</mat-icon></a>
+                      <a mat-mini-fab class="remove-icon" color="warn" (click)="showModalDelete(element.id)"><mat-icon>remove</mat-icon></a>
                     </td>
                   </ng-container>
 
