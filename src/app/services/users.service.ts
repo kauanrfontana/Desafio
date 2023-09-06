@@ -13,6 +13,10 @@ export class UsersService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getPages(): Observable<any> {
+    return this.httpClient.get<any>(`https://gorest.co.in/public/v2/users`, {observe: 'response'});
+  }
+
   getUsers(page: number = 1, per_page: string = '10'): Observable<any> {
 
     const headers = new HttpHeaders({

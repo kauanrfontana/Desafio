@@ -92,7 +92,7 @@
                 <a mat-icon-button class="pagination-button"  (click)="paginate('first')" [disabled]="inFirstPage || filtered"><mat-icon class="icon-lf-changer">first_page</mat-icon></a>
                 <a mat-icon-button class="pagination-button" (click)="paginate(-1)" [disabled]="inFirstPage || filtered"><mat-icon class="icon-unit-changer">arrow_back_ios</mat-icon></a>
                 <a mat-icon-button class="pagination-button" (click)="paginate(1)" [disabled]="inLastPage || filtered"><mat-icon class="icon-unit-changer">arrow_forward_ios</mat-icon></a>
-                <a mat-icon-button class="pagination-button" (click)="paginate(this.maxPage - this.pages)" [disabled]="inLastPage || filtered"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
+                <a mat-icon-button class="pagination-button" (click)="paginate(this.totalPages - this.pages)" [disabled]="inLastPage || filtered"><mat-icon class="icon-lf-changer">last_page</mat-icon></a>
               </div>
             </div>
 

@@ -34,7 +34,7 @@
 
         <mat-form-field>
             <mat-label>Descrição</mat-label>
-            <textarea matInput type="text" [(ngModel)]="postData.body" class="mat-textarea-element" [formControl]="bodyControl"></textarea>
+            <textarea matInput type="text" maxlength="200" [(ngModel)]="postData.body" class="mat-textarea-element" [formControl]="bodyControl"></textarea>
             <mat-error *ngIf="bodyControl.invalid">{{getErrorMessage(bodyControl)}}</mat-error>
         </mat-form-field>
         <button mat-raised-button class="submit-button" (click)="newPost()" [disabled]="bodyControl.invalid || nameControl.invalid ||bodyControl.invalid">Cadastrar</button>

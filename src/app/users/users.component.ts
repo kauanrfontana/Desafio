@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { UsersService } from '../services/users.service';
-import { firstValueFrom  } from 'rxjs';
+import { Subscription, firstValueFrom  } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit, OnDestroy{
 
   // variáveis com influência na tabela
   beforeDados: any;
@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit{
   pages = 1;
   inFirstPage = true;
   inLastPage = false;
-  maxPage: number = 100;
+  totalPages: number;
   loading: boolean = false;
   userName = '';
 
@@ -46,6 +46,8 @@ export class UsersComponent implements OnInit{
 
   userDelId = "";
 
+  subscription = new Subscription();
+
   @ViewChild('testeSnack') testSnack: ElementRef
 
 
@@ -53,6 +55,14 @@ export class UsersComponent implements OnInit{
 
   async ngOnInit(){
     this.loading = true;
+
+    this.subscription.add(
+      this.usersService.getPages()
+      .subscribe({
+        next: response => this.totalPages = Number(response.headers.get('X-Pagination-Pages'))
+      })
+    )
+
     await firstValueFrom(this.beforeDados = this.usersService.getUsers())
         .then(() => {
           this.loading = false;
@@ -88,7 +98,7 @@ export class UsersComponent implements OnInit{
     }
 
     this.inFirstPage = this.pages === 1;
-    this.inLastPage = this.pages === this.maxPage;
+    this.inLastPage = this.pages === this.totalPages;
 
     await setTimeout(() => {
       firstValueFrom(this.beforeDados = this.usersService.getPagination(this.pages, this.per_page))
@@ -186,16 +196,11 @@ export class UsersComponent implements OnInit{
     this.router.navigate(['/update', id]);
   }
 
-  snackSuccess() {
-    this._snackBar.open("");
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
-
-  snackError() {
-
-  }
+  
 
 }
-function viewChild() {
-  throw new Error('Function not implemented.');
-}
+
 

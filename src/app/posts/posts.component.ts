@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 import { UsersService } from '../services/users.service';
-import { firstValueFrom, Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { firstValueFrom, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, OnDestroy{
 
   // variáveis com influência na tabela
   beforeDados: any
@@ -24,7 +22,7 @@ export class PostsComponent implements OnInit {
   pages = 1;
   inFirstPage = true;
   inLastPage = false;
-  maxPage: number = 100;
+  totalPages: number;
   loading: boolean = false;
   userName: string;
   visible = false;
@@ -49,10 +47,20 @@ export class PostsComponent implements OnInit {
 
   postDelId = "";
 
+  subscription = new Subscription();
+
   constructor(private postsService: PostsService, private usersService: UsersService, private router: Router, private _snackBar: MatSnackBar) { }
 
   async ngOnInit() {
     this.loading = true;
+
+    this.subscription.add(
+      this.postsService.getPages()
+      .subscribe({
+        next: response => this.totalPages = Number(response.headers.get('X-Pagination-Pages'))
+      })
+    )
+
     await firstValueFrom(this.beforeDados = this.postsService.getPosts())
       .then(() => {
         this.loading = false;
@@ -104,7 +112,7 @@ export class PostsComponent implements OnInit {
     }
 
     this.inFirstPage = this.pages === 1;
-    this.inLastPage = this.pages === this.maxPage;
+    this.inLastPage = this.pages === this.totalPages;
 
     await setTimeout(() => {
       firstValueFrom(this.beforeDados = this.postsService.getPagination(this.pages, this.per_page))
@@ -203,6 +211,9 @@ export class PostsComponent implements OnInit {
     this.router.navigate(['/posts/update', id]);
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 
 }
