@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { Subscription, firstValueFrom  } from 'rxjs';
 import { Router } from '@angular/router';
@@ -48,8 +48,6 @@ export class UsersComponent implements OnInit, OnDestroy{
 
   subscription = new Subscription();
 
-  @ViewChild('testeSnack') testSnack: ElementRef
-
 
   constructor(private usersService: UsersService, private router: Router,  private _snackBar: MatSnackBar){}
 
@@ -63,13 +61,29 @@ export class UsersComponent implements OnInit, OnDestroy{
       })
     )
 
+    this.subscription.add(
+      this.usersService.edited.subscribe({
+        next: response => {
+          if(response === 'success'){
+            this._snackBar.open("Usuário editado com sucesso!", "", {
+              duration: 2000
+            })
+          }else {
+            this._snackBar.open("Erro ao editar usuário!", "", {
+              duration: 2000
+            })
+          }
+        }
+      })
+    )
+
     await firstValueFrom(this.beforeDados = this.usersService.getUsers())
         .then(() => {
           this.loading = false;
           this.dados = this.beforeDados;
         })
         .catch(()=>{
-          alert('error');
+          this._snackBar.open("Erro na api, fora do ar!", "OK")
       })
 
   }

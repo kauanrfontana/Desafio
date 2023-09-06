@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PostsService {
   key: string = '10c9e9a940fc2c262c2f592bd408c23328ad9800ec9e880be276c5529a1f99ab';
+
+  edited = new Subject<string>();
+
   constructor(private httpClient: HttpClient) { }
 
   getPages(): Observable<any> {

@@ -55,17 +55,12 @@ export class UpdateUserComponent implements OnInit{
   updateUser(){
     this.usersService.updateUser(this.userId, this.data).subscribe(
       () => {
-        console.log('Usuário editado com sucesso');
+        this.usersService.edited.next('success');
         this.exit();
         // Lógica adicional após a exclusão do usuário
       },
       (error) => {
-        console.error('Erro ao editar usuário', error);
-        let erro: string;
-        if(error.ok === false){
-          erro = "erro ao cadastrar usuário!"
-        }
-        alert(erro)
+        this.usersService.edited.next('error');
         this.exit();
 
       }

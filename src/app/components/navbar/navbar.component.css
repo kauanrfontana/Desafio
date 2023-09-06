@@ -1,5 +1,7 @@
-.mat-sidenav-container {
+.container {
     display: flex;
+    min-height: 100%;
+    overflow-y: auto;
   }
 
 .sidenav {
@@ -35,9 +37,9 @@
 }
 
 .content{
+    flex: 1;
     padding: 1rem;
     padding-top: 5rem;
-    flex: 1;
     justify-content: center;
 }
 

@@ -28,6 +28,9 @@ const routes: Routes = [
     path: "posts/update/:id",
     component: UpdatePostComponent,
   },
+  {
+    path: "**", redirectTo: ""
+  }
 ];
 
 @NgModule({

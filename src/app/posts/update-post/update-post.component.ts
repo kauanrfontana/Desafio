@@ -54,17 +54,13 @@ export class UpdatePostComponent implements OnInit{
 
     this.postsService.updatePost(this.postId, this.postData).subscribe(
       () => {
-        console.log('Post editado com sucesso');
-        this.exit()
+        this.postsService.edited.next('success');
+        this.exit();
+        // Lógica adicional após a exclusão do usuário
       },
       (error) => {
-        console.error('Erro ao editar post', error);
-        let erro: string;
-        if(error.ok === false){
-          erro = "edição inválida!"
-        }
-        alert(erro)
-        this.exit()
+        this.postsService.edited.next('error');
+        this.exit();
 
       }
     );

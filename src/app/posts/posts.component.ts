@@ -61,13 +61,31 @@ export class PostsComponent implements OnInit, OnDestroy{
       })
     )
 
+    this.subscription.add(
+      this.postsService.edited.subscribe({
+        next: response => {
+          if(response === 'success'){
+            this._snackBar.open("Post editado com sucesso!", "", {
+              duration: 2000
+            })
+          }else {
+            this._snackBar.open("Erro ao editar post!", "", {
+              duration: 2000
+            })
+          }
+        }
+      })
+    )
+
+    
+
     await firstValueFrom(this.beforeDados = this.postsService.getPosts())
       .then(() => {
         this.loading = false;
         this.dados = this.beforeDados;
       })
       .catch(() => {
-        alert('error');
+        this._snackBar.open("Erro na api, fora do ar!", "OK")
       })
 
   }
