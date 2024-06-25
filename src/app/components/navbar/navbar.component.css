@@ -1,0 +1,67 @@
+
+.container {
+    display: flex;
+    min-height: 100%;
+    min-width: 100%;
+    overflow-y: auto;
+}
+
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.sidenav {
+    width: 200px;
+    display: flex;
+    position: fixed;
+    margin-top: 64px;
+}
+
+@media screen and (max-width: 1000px) {
+    .sidenav {
+        width: 80px;
+        display: flex;
+        position: fixed;
+        margin-top: 64px;
+    }
+    
+
+}
+
+a {
+    width: 100%;
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 5px;
+}
+
+.nav-icon {
+    align-self: center;
+    justify-self: center;
+}
+
+.nav-items {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.active {
+    /* adicionar ao estar na página */
+    background-color: #3f51b5 !important;
+    color: #FFF !important;
+}
+
+.nav-items:hover {
+    scale: 1.02;
+}
+
+.content {
+    flex: 1;
+    padding: 1rem;
+    padding-top: 5rem;
+    justify-content: center;
+}

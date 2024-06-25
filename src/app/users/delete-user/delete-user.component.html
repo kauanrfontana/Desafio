@@ -1,0 +1,7 @@
+<div class="modal-delete">
+    <a class="exit-button" (click)="this.exitDelete.emit()"><mat-icon>clear</mat-icon></a>
+    <h2 class="title">Deseja excluir este usuário?</h2>
+    <button type="submit" mat-raised-button class="button-delete" color="warn" (click)="deleteUser()">Excluir</button>
+
+</div>
+<div class="overlay" (click)="this.exitDelete.emit()"></div>

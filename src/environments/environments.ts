@@ -1,0 +1,1 @@
+export const API_PATH = "https://gorest.co.in/public/v2/"

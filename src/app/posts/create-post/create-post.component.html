@@ -1,0 +1,44 @@
+<div class="modal-create">
+    <a class="exit-button" (click)="this.exitCreate.emit()"><mat-icon>clear</mat-icon></a>
+    <h1 class="title">Cadastro de Post</h1>
+
+    <div class="content">
+        <mat-form-field>
+            <mat-label>Nome do usuário</mat-label>
+            <input matInput type="text" [(ngModel)]="postUsername" class="mat-input-element" [formControl]="nameControl" (input)="getUserData(postUsername)">
+            <mat-error *ngIf="nameControl.invalid">{{getErrorMessage(nameControl)}}</mat-error>
+        </mat-form-field>
+        <div class="user-data" *ngIf="postData.user_id">
+            <mat-form-field class="margin-input-disabled">
+                <mat-label>nome do usuário</mat-label>
+                <input matInput type="text" [value]="userData.name" class="mat-input-element-hide" readonly>
+            </mat-form-field>
+            <mat-form-field class="margin-input-disabled">
+                <mat-label>email</mat-label>
+                <input matInput type="text" [value]="userData.email" class="mat-input-element-hide" readonly>
+            </mat-form-field>
+            <mat-form-field class="margin-input-disabled">
+                <mat-label>gênero</mat-label>
+                <input matInput type="text" [value]="userData.gender" class="mat-input-element-hide" readonly>
+            </mat-form-field>
+            <mat-form-field class="margin-input-disabled">
+                <mat-label>status</mat-label>
+                <input matInput type="text" [value]="userData.status" class="mat-input-element-hide" readonly>
+            </mat-form-field>
+        </div>
+        <mat-form-field>
+            <mat-label>Título</mat-label>
+            <input matInput type="text" [(ngModel)]="postData.title" class="mat-input-element" [formControl]="titleControl">
+            <mat-error *ngIf="titleControl.invalid">{{getErrorMessage(titleControl)}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <textarea matInput type="text" maxlength="200" [(ngModel)]="postData.body" class="mat-textarea-element" [formControl]="bodyControl"></textarea>
+            <mat-error *ngIf="bodyControl.invalid">{{getErrorMessage(bodyControl)}}</mat-error>
+        </mat-form-field>
+        <button mat-raised-button class="submit-button" (click)="newPost()" [disabled]="bodyControl.invalid || nameControl.invalid ||bodyControl.invalid">Cadastrar</button>
+    </div>
+    
+</div>
+<div class="overlay" (click)="this.exitCreate.emit()"></div>

@@ -1,0 +1,22 @@
+<app-posts></app-posts>
+<div class="modal-create">
+  <a class="exit-button" (click)="this.exit()"><mat-icon>clear</mat-icon></a>
+  <h1 class="title">Edição de Post</h1>
+
+  <div class="content">
+      <mat-form-field>
+          <mat-label>Título</mat-label>
+          <input matInput type="text" [(ngModel)]="postData.title" class="mat-input-element" [formControl]="titleControl">
+          <mat-error *ngIf="titleControl.invalid">{{getErrorMessage(titleControl)}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>Descrição</mat-label>
+          <textarea matInput type="text" [(ngModel)]="postData.body" class="mat-textarea-element" [formControl]="bodyControl"></textarea>
+          <mat-error *ngIf="bodyControl.invalid">{{getErrorMessage(bodyControl)}}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button class="submit-button" (click)="UpdatePost()" [disabled]="bodyControl.invalid || bodyControl.invalid">Alterar</button>
+  </div>
+
+</div>
+<div class="overlay" (click)="this.exit()"></div>
